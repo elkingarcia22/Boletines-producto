@@ -1,0 +1,2177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HIRING · Boletines de Producto</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #ffffff;
+      --bg2: #f7f7f8;
+      --bg3: #f0f0f2;
+      --txt: #111111;
+      --txt2: #555566;
+      --txt3: #999aaa;
+      --bdr: rgba(0,0,0,0.1);
+      --bdr2: rgba(0,0,0,0.22);
+      --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+      --mono: 'SF Mono', 'Monaco', 'Consolas', monospace;
+      --r: 10px;
+      --r2: 14px;
+      --slk-bg: #1a1d21;
+      --slk-bg2: #212529;
+      --slk-bdr: #2e3137;
+      --slk-txt: #d1d2d3;
+      --slk-hd: #f0f0f0;
+      --slk-muted: #72767d;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1c1e22;
+        --bg2: #252830;
+        --bg3: #1c1e22;
+        --txt: #e8e8ec;
+        --txt2: #a0a2b0;
+        --txt3: #606272;
+        --bdr: rgba(255,255,255,0.1);
+        --bdr2: rgba(255,255,255,0.22);
+      }
+    }
+
+    html, body {
+      height: 100%;
+      font-family: var(--sans);
+      color: var(--txt);
+      background: var(--bg2);
+      line-height: 1.55;
+      font-size: 14px;
+    }
+
+    /* ── Force light or dark via data attribute ───── */
+    [data-theme="light"] {
+      --bg: #ffffff; --bg2: #f7f7f8; --bg3: #f0f0f2;
+      --txt: #111111; --txt2: #555566; --txt3: #999aaa;
+      --bdr: rgba(0,0,0,0.1); --bdr2: rgba(0,0,0,0.22);
+    }
+    [data-theme="dark"] {
+      --bg: #1c1e22; --bg2: #252830; --bg3: #1c1e22;
+      --txt: #e8e8ec; --txt2: #a0a2b0; --txt3: #606272;
+      --bdr: rgba(255,255,255,0.1); --bdr2: rgba(255,255,255,0.22);
+    }
+
+    /* ── Layout shell ─────────────────────────────── */
+    .shell {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      padding: 0;
+    }
+
+    /* ── Header ───────────────────────────────────── */
+    .hdr {
+      flex-shrink: 0;
+      background: var(--bg);
+      border-bottom: 1px solid var(--bdr);
+      padding: 12px 30px 11px;
+    }
+
+    .hdr-inner {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .hdr-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: var(--r);
+      background: linear-gradient(135deg, #4a6cf7 0%, #7c3aed 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 15px;
+      flex-shrink: 0;
+    }
+
+    .hdr-text {}
+    .hdr-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--txt);
+      letter-spacing: -0.2px;
+    }
+    .hdr-desc {
+      font-size: 11.5px;
+      color: var(--txt3);
+      margin-top: 1px;
+    }
+
+    /* Theme toggle */
+    .theme-btn {
+      margin-left: auto;
+      width: 34px;
+      height: 34px;
+      border-radius: var(--r);
+      border: 1px solid var(--bdr);
+      background: var(--bg2);
+      color: var(--txt2);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+      transition: background 0.15s, color 0.15s;
+    }
+    .theme-btn:hover { background: var(--bg3); color: var(--txt); }
+
+    /* ── Tabs ─────────────────────────────────────── */
+    .tabs {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      background: var(--bg);
+      border-bottom: 1px solid var(--bdr);
+      padding: 10px 24px;
+      gap: 6px;
+      overflow-x: auto;
+    }
+
+    .tb {
+      padding: 7px 16px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--txt2);
+      cursor: pointer;
+      border: 1px solid transparent;
+      background: transparent;
+      border-radius: 99px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      transition: background 0.15s, color 0.15s, border-color 0.15s;
+      white-space: nowrap;
+    }
+
+    .tb:hover {
+      background: var(--bg2);
+      color: var(--txt);
+    }
+
+    .tb.on {
+      background: color-mix(in srgb, var(--accent, #4a6cf7) 12%, transparent);
+      color: var(--accent, var(--txt));
+      border-color: color-mix(in srgb, var(--accent, #4a6cf7) 30%, transparent);
+    }
+
+    .freq {
+      font-size: 10px;
+      font-weight: 500;
+      padding: 2px 7px;
+      border-radius: 20px;
+      background: var(--bg2);
+      color: var(--txt3);
+    }
+
+    /* ── Main layout ─────────────────────────────── */
+    .main {
+      flex: 1;
+      display: flex;
+      overflow: hidden;
+      min-height: 0;
+      padding: 16px 30px 30px;
+      gap: 16px;
+      background: var(--bg2);
+    }
+
+    /* ── Sidebar card ─────────────────────────────── */
+    .sidebar {
+      width: 220px;
+      flex-shrink: 0;
+      background: var(--bg);
+      border: 1px solid var(--bdr);
+      border-radius: var(--r2);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transition: width 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .sidebar.collapsed { width: 56px; }
+
+    .sidebar-header {
+      padding: 12px 12px 10px;
+      border-bottom: 1px solid var(--bdr);
+    }
+
+    .sidebar-header-inner {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .sidebar-header-text {
+      flex: 1;
+      min-width: 0;
+      overflow: hidden;
+      transition: opacity 0.15s, width 0.22s;
+    }
+
+    .sidebar-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--txt);
+      letter-spacing: -0.1px;
+      white-space: nowrap;
+    }
+
+    .sidebar-sublabel {
+      font-size: 10.5px;
+      color: var(--txt3);
+      margin-top: 2px;
+      white-space: nowrap;
+    }
+
+    .sidebar-toggle {
+      width: 26px;
+      height: 26px;
+      border-radius: 7px;
+      border: 1px solid var(--bdr);
+      background: transparent;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--txt3);
+      font-size: 14px;
+      flex-shrink: 0;
+      transition: background 0.14s, color 0.14s;
+    }
+
+    .sidebar-toggle:hover { background: var(--bg2); color: var(--txt); }
+
+    .sidebar.collapsed .sidebar-header { padding: 12px 8px 10px; }
+    .sidebar.collapsed .sidebar-header-text { display: none; }
+    .sidebar.collapsed .sidebar-toggle { margin: 0 auto; }
+    .sidebar.collapsed .sidebar-tip { display: none; }
+
+    .sidebar-nav {
+      flex: 1;
+      overflow-y: auto;
+      padding: 10px 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .sidebar.collapsed .sidebar-nav { padding: 10px 8px; align-items: center; }
+
+    .nav-item {
+      display: flex;
+      align-items: stretch;
+      gap: 0;
+      padding: 0;
+      border-radius: var(--r);
+      border: 1px solid transparent;
+      background: transparent;
+      cursor: pointer;
+      text-align: left;
+      width: 100%;
+      overflow: hidden;
+      transition: background 0.14s, border-color 0.14s, box-shadow 0.14s;
+    }
+
+    .nav-item:hover {
+      background: var(--bg2);
+      border-color: var(--bdr);
+    }
+
+    .nav-item.on {
+      background: var(--txt);
+      border-color: var(--txt);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+    }
+
+    .nav-stripe {
+      width: 3px;
+      flex-shrink: 0;
+    }
+
+    .sidebar.collapsed .nav-stripe { display: none; }
+    .sidebar.collapsed .nav-inner { display: none; }
+    .sidebar.collapsed .nav-item {
+      width: 36px;
+      height: 36px;
+      border-radius: 9px;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .nav-icon {
+      width: 36px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      color: var(--txt3);
+      transition: color 0.12s;
+    }
+
+    .nav-item.on .nav-icon { color: var(--bg); }
+    .nav-item:hover:not(.on) .nav-icon { color: var(--txt); }
+
+    .sidebar.collapsed .nav-icon { width: 100%; height: 100%; border-radius: 0; font-size: 16px; }
+
+    .nav-inner {
+      flex: 1;
+      padding: 10px 10px 10px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+    }
+
+    .nav-name {
+      font-size: 12.5px;
+      font-weight: 500;
+      color: var(--txt2);
+      transition: color 0.12s;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .nav-item.on .nav-name { color: var(--bg); font-weight: 600; }
+    .nav-item:hover:not(.on) .nav-name { color: var(--txt); }
+
+    .nav-meta {
+      font-size: 10px;
+      color: var(--txt3);
+      transition: color 0.12s;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .nav-item.on .nav-meta { color: rgba(255,255,255,0.55); }
+
+    @media (prefers-color-scheme: dark) {
+      .nav-item.on .nav-meta { color: rgba(0,0,0,0.5); }
+    }
+    [data-theme="light"] .nav-item.on .nav-meta { color: rgba(255,255,255,0.55); }
+    [data-theme="dark"]  .nav-item.on .nav-meta { color: rgba(0,0,0,0.5); }
+
+    .nav-tag {
+      font-size: 9px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: var(--txt3);
+      border: 1px solid var(--bdr2);
+      border-radius: 4px;
+      padding: 1px 5px;
+      align-self: flex-start;
+      margin-top: 4px;
+      transition: color 0.12s, border-color 0.12s, background 0.12s;
+    }
+
+    .nav-item.on .nav-tag {
+      color: var(--txt);
+      background: var(--bg);
+      border-color: transparent;
+    }
+
+    .sidebar-tip {
+      padding: 10px 14px 13px;
+      border-top: 1px solid var(--bdr);
+      font-size: 10.5px;
+      color: var(--txt3);
+      line-height: 1.6;
+      display: flex;
+      gap: 7px;
+      align-items: flex-start;
+    }
+
+    .sidebar-tip i { flex-shrink: 0; color: var(--txt3); margin-top: 1px; font-size: 12px; }
+
+    /* ── Intro page ───────────────────────────────── */
+    .intro-page {
+      background: var(--bg2);
+      min-height: 100%;
+      padding: 32px 36px 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      font-family: var(--sans);
+    }
+
+    .intro-hero {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .intro-hero-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: var(--txt);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--bg);
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    .intro-hero-text {}
+
+    .intro-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--txt);
+      letter-spacing: -0.3px;
+      line-height: 1.25;
+    }
+
+    .intro-sub {
+      font-size: 12.5px;
+      color: var(--txt3);
+      margin-top: 5px;
+      line-height: 1.6;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .intro-section {
+      background: var(--bg);
+      border: 1px solid var(--bdr);
+      border-radius: var(--r2);
+      overflow: hidden;
+    }
+
+    .intro-section-hd {
+      padding: 10px 16px 9px;
+      background: var(--bg3);
+      border-bottom: 1px solid var(--bdr);
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--txt3);
+    }
+
+    .intro-section-hd i { font-size: 13px; }
+
+    /* Pipeline flow */
+    .pipeline {
+      padding: 20px 20px 22px;
+      display: flex;
+      align-items: center;
+      gap: 0;
+    }
+
+    .pipe-col {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .pipe-arrow {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      padding: 0 10px;
+    }
+
+    .pipe-arrow-line {
+      flex: 1;
+      height: 1px;
+      background: var(--bdr2);
+      position: relative;
+    }
+
+    .pipe-arrow-line::after {
+      content: '›';
+      position: absolute;
+      right: -6px;
+      top: 50%;
+      transform: translateY(-53%);
+      color: var(--txt3);
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .pipe-node {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 10px;
+      background: var(--bg2);
+      border: 1px solid var(--bdr);
+      border-radius: 8px;
+      white-space: nowrap;
+    }
+
+    .pipe-node-icon {
+      width: 22px;
+      height: 22px;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      flex-shrink: 0;
+    }
+
+    .pipe-node-label {
+      font-size: 11.5px;
+      font-weight: 500;
+      color: var(--txt2);
+    }
+
+    .pipe-node-sub {
+      font-size: 9.5px;
+      color: var(--txt3);
+      margin-top: 1px;
+    }
+
+    .pipe-center {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .pipe-center-box {
+      background: var(--txt);
+      color: var(--bg);
+      border-radius: 10px;
+      padding: 10px 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+    }
+
+    .pipe-center-box i { font-size: 18px; }
+
+    .pipe-center-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+    }
+
+    .pipe-center-sub {
+      font-size: 9.5px;
+      opacity: 0.6;
+    }
+
+    .pipe-output {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .pipe-channel {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 6px 10px;
+      background: #1a1d21;
+      border-radius: 7px;
+      border: 1px solid #2e3137;
+    }
+
+    .pipe-channel-hash {
+      color: #72767d;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .pipe-channel-name {
+      font-size: 11px;
+      font-weight: 500;
+      color: #d1d2d3;
+      font-family: var(--mono);
+    }
+
+    .pipe-channel-badge {
+      font-size: 9px;
+      padding: 1px 5px;
+      border-radius: 4px;
+      background: rgba(255,255,255,0.08);
+      color: #72767d;
+      margin-left: auto;
+      font-family: var(--sans);
+    }
+
+    /* Freq cards */
+    .freq-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+    }
+
+    .freq-card {
+      padding: 16px 16px 18px;
+      border-right: 1px solid var(--bdr);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .freq-card:last-child { border-right: none; }
+
+    .freq-card-num {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--txt);
+      letter-spacing: -1px;
+      line-height: 1;
+    }
+
+    .freq-card-name {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--txt);
+      margin-top: 2px;
+    }
+
+    .freq-card-meta {
+      font-size: 10.5px;
+      color: var(--txt3);
+      line-height: 1.5;
+    }
+
+    .freq-card-tag {
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: var(--txt3);
+      border: 1px solid var(--bdr2);
+      border-radius: 4px;
+      padding: 1px 5px;
+      align-self: flex-start;
+      margin-top: 4px;
+    }
+
+    /* Content card: newsletter ─────────────────── */
+    .content-card {
+      flex: 1;
+      min-width: 0;
+      border: 1px solid var(--bdr);
+      border-radius: var(--r2);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .content {
+      flex: 1;
+      overflow-y: auto;
+      background: var(--slk-bg);
+      min-width: 0;
+    }
+
+    .boletin { display: none; }
+    .boletin.on { display: block; }
+    .content:has([data-b="inicio"].on) { background: var(--bg2); }
+
+    @media (prefers-color-scheme: light) {
+      .content { background: #f1f2f4; }
+      .slk-top { background: #e8e9ec !important; border-bottom-color: rgba(0,0,0,0.12) !important; }
+      .slk-b { color: #3d3f49 !important; }
+      .sh { color: #111 !important; }
+      .sv { color: #111 !important; }
+      .sdiv { border-top-color: rgba(0,0,0,0.1) !important; }
+      .sm { color: #7a7e89 !important; }
+    }
+
+    /* ── Hoverable sections ───────────────────────── */
+    .ss {
+      margin-top: 4px;
+      border-radius: 6px;
+      padding: 6px 8px;
+      margin-left: -8px;
+      margin-right: -8px;
+      transition: background 0.12s;
+      cursor: default;
+      position: relative;
+    }
+
+    .ss:hover { background: rgba(255,255,255,0.05); }
+
+    @media (prefers-color-scheme: light) {
+      .ss:hover { background: rgba(0,0,0,0.04); }
+    }
+
+    .ss-hint {
+      position: absolute;
+      top: 6px;
+      right: 8px;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.5);
+      font-size: 10px;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      font-style: normal;
+      flex-shrink: 0;
+      line-height: 1;
+    }
+
+    .ss:hover .ss-hint { display: flex; }
+
+    @media (prefers-color-scheme: light) {
+      .ss-hint { background: rgba(0,0,0,0.08); color: rgba(0,0,0,0.4); }
+    }
+
+    /* ── Popover ──────────────────────────────────── */
+    .popover {
+      position: fixed;
+      z-index: 999;
+      width: 300px;
+      background: var(--bg2);
+      border: 1px solid var(--bdr2);
+      border-radius: var(--r2);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.28), 0 4px 12px rgba(0,0,0,0.14);
+      overflow: hidden;
+      pointer-events: none;
+      opacity: 0;
+      transform: translateY(4px);
+      transition: opacity 0.16s, transform 0.16s;
+    }
+
+    .popover.vis { opacity: 1; transform: translateY(0); pointer-events: auto; }
+
+    .pop-hd {
+      padding: 11px 14px 10px;
+      background: var(--bg);
+      border-bottom: 1px solid var(--bdr);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--txt);
+      line-height: 1.4;
+      letter-spacing: -0.1px;
+    }
+
+    .pop-body {
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      background: var(--bg2);
+    }
+
+    .pop-section {
+      background: var(--bg);
+      border: 1px solid var(--bdr);
+      border-radius: var(--r);
+      overflow: hidden;
+    }
+
+    .pop-label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 10px 6px;
+      background: var(--bg3);
+      border-bottom: 1px solid var(--bdr);
+      font-size: 9.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--txt3);
+    }
+
+    .pop-label-icon {
+      width: 14px;
+      height: 14px;
+      border-radius: 3px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+      flex-shrink: 0;
+    }
+
+    .pop-label-icon.obj  { background: rgba(74,108,247,0.12); color: #4a6cf7; }
+    .pop-label-icon.qs   { background: rgba(0,135,90,0.12);  color: #00875A; }
+    .pop-label-icon.aim  { background: rgba(224,122,0,0.12); color: #E07A00; }
+
+    .pop-val {
+      padding: 8px 10px;
+      font-size: 12px;
+      color: var(--txt2);
+      line-height: 1.55;
+    }
+
+    .pop-qs {
+      list-style: none;
+      padding: 6px 10px 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .pop-qs li {
+      font-size: 12px;
+      color: var(--txt2);
+      line-height: 1.45;
+      display: flex;
+      gap: 7px;
+      align-items: flex-start;
+    }
+
+    .pop-qs li::before {
+      content: '›';
+      color: var(--txt3);
+      font-size: 14px;
+      line-height: 1.2;
+      flex-shrink: 0;
+      font-weight: 600;
+    }
+
+    .slk-top {
+      position: sticky;
+      top: 0;
+      z-index: 9;
+      background: var(--slk-bg);
+      padding: 10px 18px 11px;
+      border-bottom: 1px solid var(--slk-bdr);
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .slk-top-row { display: flex; align-items: center; gap: 5px; }
+    .slk-ch { color: var(--slk-hd); font-size: 13px; font-weight: 600; }
+    .slk-desc { color: var(--slk-muted); font-size: 11px; line-height: 1.45; }
+
+    .slk-msg { padding: 16px 18px 24px; }
+
+    .slk-who {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .slk-av {
+      width: 34px;
+      height: 34px;
+      border-radius: 6px;
+      background: linear-gradient(135deg, #4a6cf7, #7c3aed);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+
+    .slk-nm { color: var(--slk-hd); font-size: 13px; font-weight: 600; }
+    .slk-ts { color: var(--slk-muted); font-size: 11px; margin-left: 6px; }
+
+    .slk-b {
+      color: var(--slk-txt);
+      font-size: 13px;
+      line-height: 1.75;
+      font-family: var(--mono);
+    }
+
+    .sh {
+      color: var(--slk-hd);
+      font-weight: 600;
+      display: block;
+      margin-bottom: 4px;
+      font-size: 13px;
+    }
+
+    .sg { color: #2eb67d; }
+    .sy { color: #e8b73e; }
+    .so { color: #e87d3e; }
+    .sr { color: #e84c4c; }
+    .sb { color: #6aadff; }
+
+    .sv { color: #f2f2f2; font-weight: 500; }
+    .sm { color: var(--slk-muted); font-size: 12px; }
+
+    .sdiv {
+      display: block;
+      border-top: 1px solid var(--slk-bdr);
+      margin: 14px 0;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--bdr2); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--txt3); }
+
+    /* ── Responsive ───────────────────────────────── */
+    @media (max-width: 900px) {
+      .main { flex-direction: column; padding: 10px; gap: 10px; }
+      .sidebar { width: 100%; flex-direction: column; }
+      .sidebar-nav { flex-direction: row; flex-wrap: wrap; padding: 6px; gap: 4px; }
+      .sidebar-tip { display: none; }
+      .nav-item { width: auto; flex: 1; min-width: 110px; }
+      .shell { height: auto; min-height: 100vh; }
+      .content-card { min-height: 60vh; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header class="hdr">
+      <div class="hdr-inner">
+        <div class="hdr-icon"><i class="ti ti-chart-bar"></i></div>
+        <div class="hdr-text">
+          <div class="hdr-title">HIRING · Boletines de producto</div>
+          <div class="hdr-desc">Cuatro boletines automáticos — negocio, experiencia de uso, operación y foco estratégico.</div>
+        </div>
+        <button class="theme-btn" id="themeBtn" title="Cambiar tema"><i class="ti ti-moon" id="themeIcon"></i></button>
+      </div>
+    </header>
+
+    <div class="main">
+
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+          <div class="sidebar-header-inner" style="justify-content:flex-end">
+            <button class="sidebar-toggle" id="sidebarToggle" title="Contraer menú">
+              <i class="ti ti-layout-sidebar-left-collapse" id="toggleIcon"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="sidebar-nav">
+          <button class="nav-item on" data-b="inicio" title="Inicio">
+            <div class="nav-stripe"></div>
+            <div class="nav-icon"><i class="ti ti-home"></i></div>
+            <div class="nav-inner">
+              <div class="nav-name">Inicio</div>
+              <div class="nav-meta">Qué es · cómo funciona</div>
+            </div>
+          </button>
+
+          <button class="nav-item" data-b="semanal" title="Radar semanal">
+            <div class="nav-stripe"></div>
+            <div class="nav-icon"><i class="ti ti-radar"></i></div>
+            <div class="nav-inner">
+              <div class="nav-name">Radar semanal</div>
+              <div class="nav-meta">Operación · cada lunes</div>
+              <div class="nav-tag">semanal</div>
+            </div>
+          </button>
+
+          <button class="nav-item" data-b="quincenal" title="Pulso quincenal">
+            <div class="nav-stripe"></div>
+            <div class="nav-icon"><i class="ti ti-activity"></i></div>
+            <div class="nav-inner">
+              <div class="nav-name">Pulso quincenal</div>
+              <div class="nav-meta">Producto · cada dos semanas</div>
+              <div class="nav-tag">quincenal</div>
+            </div>
+          </button>
+
+          <button class="nav-item" data-b="mensual" title="Estatus mensual">
+            <div class="nav-stripe"></div>
+            <div class="nav-icon"><i class="ti ti-calendar-month"></i></div>
+            <div class="nav-inner">
+              <div class="nav-name">Estatus mensual</div>
+              <div class="nav-meta">Gestión · primer día del mes</div>
+              <div class="nav-tag">mensual</div>
+            </div>
+          </button>
+
+          <button class="nav-item" data-b="trimestral" title="Estatus trimestral">
+            <div class="nav-stripe"></div>
+            <div class="nav-icon"><i class="ti ti-presentation-analytics"></i></div>
+            <div class="nav-inner">
+              <div class="nav-name">Estatus trimestral</div>
+              <div class="nav-meta">Estrategia · cierre de Q</div>
+              <div class="nav-tag">trimestral</div>
+            </div>
+          </button>
+        </div>
+
+        <div class="sidebar-tip">
+          <i class="ti ti-cursor-text"></i>
+          <span>Hover sobre cada sección del boletín para ver objetivo y preguntas.</span>
+        </div>
+      </aside>
+
+      <div class="content-card">
+      <main class="content" id="content">
+
+        <div class="boletin on" data-b="inicio">
+          <div class="intro-page">
+
+            <!-- Hero -->
+            <div class="intro-hero">
+              <div class="intro-hero-icon"><i class="ti ti-send"></i></div>
+              <div class="intro-hero-text">
+                <div class="intro-title">Boletines automáticos de producto</div>
+                <div class="intro-sub">Contexto continuo sin reuniones extra. Cada producto tiene su propio canal en Slack, agrupados en la carpeta <strong>métricas de producto</strong>, donde n8n publica automáticamente análisis en 4 frecuencias — semanal, quincenal, mensual y trimestral.</div>
+              </div>
+            </div>
+
+            <!-- Pipeline -->
+            <div class="intro-section">
+              <div class="intro-section-hd"><i class="ti ti-route"></i> Cómo funciona el pipeline</div>
+              <div class="pipeline">
+
+                <!-- Sources -->
+                <div class="pipe-col">
+                  <div class="pipe-node">
+                    <div class="pipe-node-icon" style="background:#e8f0fe;color:#1a73e8"><i class="ti ti-database"></i></div>
+                    <div>
+                      <div class="pipe-node-label">BigQuery</div>
+                      <div class="pipe-node-sub">Datos de producto</div>
+                    </div>
+                  </div>
+                  <div class="pipe-node">
+                    <div class="pipe-node-icon" style="background:#fce8f3;color:#c2185b"><i class="ti ti-chart-dots"></i></div>
+                    <div>
+                      <div class="pipe-node-label">PostHog</div>
+                      <div class="pipe-node-sub">Sesiones · funnel · fricción</div>
+                    </div>
+                  </div>
+                  <div class="pipe-node">
+                    <div class="pipe-node-icon" style="background:#e8f5e9;color:#2e7d32"><i class="ti ti-brand-jira"></i></div>
+                    <div>
+                      <div class="pipe-node-label">Jira</div>
+                      <div class="pipe-node-sub">Roadmap · tickets</div>
+                    </div>
+                  </div>
+                  <div class="pipe-node">
+                    <div class="pipe-node-icon" style="background:#fff8e1;color:#f57f17"><i class="ti ti-table"></i></div>
+                    <div>
+                      <div class="pipe-node-label">Google Sheets</div>
+                      <div class="pipe-node-sub">Feedback · OKRs</div>
+                    </div>
+                  </div>
+                  <div class="pipe-node">
+                    <div class="pipe-node-icon" style="background:#ede7f6;color:#4a148c"><i class="ti ti-layout-kanban"></i></div>
+                    <div>
+                      <div class="pipe-node-label">Canvas · Slack</div>
+                      <div class="pipe-node-sub">Feedback · OKRs</div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Arrow 1 -->
+                <div class="pipe-arrow"><div class="pipe-arrow-line"></div></div>
+
+                <!-- n8n -->
+                <div class="pipe-center">
+                  <div class="pipe-center-box">
+                    <i class="ti ti-bolt"></i>
+                    <div class="pipe-center-label">n8n</div>
+                    <div class="pipe-center-sub">Automatización</div>
+                  </div>
+                </div>
+
+                <!-- Arrow 2 -->
+                <div class="pipe-arrow"><div class="pipe-arrow-line"></div></div>
+
+                <!-- Output: Slack channels -->
+                <div class="pipe-output">
+                  <div class="pipe-channel">
+                    <div class="pipe-channel-hash">#</div>
+                    <div class="pipe-channel-name">hiring-metricas</div>
+                    <div class="pipe-channel-badge">activo</div>
+                  </div>
+                  <div class="pipe-channel" style="opacity:0.55">
+                    <div class="pipe-channel-hash">#</div>
+                    <div class="pipe-channel-name">encuestas-metricas</div>
+                    <div class="pipe-channel-badge">próximo</div>
+                  </div>
+                  <div class="pipe-channel" style="opacity:0.35">
+                    <div class="pipe-channel-hash">#</div>
+                    <div class="pipe-channel-name">[producto]-metricas</div>
+                    <div class="pipe-channel-badge">futuro</div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Comparativo -->
+            <div class="intro-section">
+              <div class="intro-section-hd"><i class="ti ti-arrows-diff"></i> Comparativo vs. período anterior</div>
+              <div style="padding:16px 20px 18px;display:flex;gap:16px;align-items:flex-start">
+                <div style="flex:1;display:flex;flex-direction:column;gap:10px">
+                  <div style="display:flex;gap:10px;align-items:flex-start">
+                    <div style="width:28px;height:28px;border-radius:7px;background:var(--bg3);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--txt2);font-size:14px"><i class="ti ti-clock-hour-4"></i></div>
+                    <div>
+                      <div style="font-size:12px;font-weight:600;color:var(--txt)">Ventana móvil automática</div>
+                      <div style="font-size:11.5px;color:var(--txt3);margin-top:2px;line-height:1.5">Cada boletin consulta el período actual y el período anterior del mismo rango: semana vs. semana anterior, mes vs. mes anterior, Q vs. Q anterior.</div>
+                    </div>
+                  </div>
+                  <div style="display:flex;gap:10px;align-items:flex-start">
+                    <div style="width:28px;height:28px;border-radius:7px;background:var(--bg3);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--txt2);font-size:14px"><i class="ti ti-trending-up"></i></div>
+                    <div>
+                      <div style="font-size:12px;font-weight:600;color:var(--txt)">Variación con signo y dirección</div>
+                      <div style="font-size:11.5px;color:var(--txt3);margin-top:2px;line-height:1.5">Cada métrica muestra el valor actual, el valor anterior y la variación en % o pp. Las flechas 🟢▲ 🔴▼ ⚪→ señalan si la señal mejora, empeora o se mantiene estable.</div>
+                    </div>
+                  </div>
+                  <div style="display:flex;gap:10px;align-items:flex-start">
+                    <div style="width:28px;height:28px;border-radius:7px;background:var(--bg3);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--txt2);font-size:14px"><i class="ti ti-alert-triangle"></i></div>
+                    <div>
+                      <div style="font-size:12px;font-weight:600;color:var(--txt)">Semáforo de alerta</div>
+                      <div style="font-size:11.5px;color:var(--txt3);margin-top:2px;line-height:1.5">La lectura ejecutiva clasifica el estado en 🟢 Positivo · 🟡 Seguimiento · 🔴 Acción urgente. Es la síntesis del comparativo en una sola señal.</div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Mini example -->
+                <div style="background:#1a1d21;border-radius:10px;padding:12px 14px;font-family:var(--mono);font-size:11px;color:#d1d2d3;line-height:1.7;min-width:200px;border:1px solid #2e3137">
+                  <div style="color:#72767d;font-size:10px;margin-bottom:6px">ejemplo · pulso semanal</div>
+                  <div>👤 Usuarios: <span style="color:#f0f0f0;font-weight:600">44</span></div>
+                  <div style="color:#72767d;font-size:10px;padding-left:12px">vs. 48 ant. · <span style="color:#e84c4c">▼ -8,33%</span></div>
+                  <div style="margin-top:4px">💻 Sesiones: <span style="color:#f0f0f0;font-weight:600">288</span></div>
+                  <div style="color:#72767d;font-size:10px;padding-left:12px">vs. 264 ant. · <span style="color:#2eb67d">▲ +9,09%</span></div>
+                  <div style="margin-top:4px">⚡ Acciones: <span style="color:#f0f0f0;font-weight:600">1.359</span></div>
+                  <div style="color:#72767d;font-size:10px;padding-left:12px">vs. 1.002 ant. · <span style="color:#2eb67d">▲ +35,63%</span></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 4 boletines -->
+            <div class="intro-section">
+              <div class="intro-section-hd"><i class="ti ti-calendar-repeat"></i> Los 4 boletines</div>
+              <div class="freq-grid">
+                <div class="freq-card">
+                  <div class="freq-card-num">01</div>
+                  <div class="freq-card-name">Radar semanal</div>
+                  <div class="freq-card-meta">Operación, fricción y uso. Detecta cambios antes de que se conviertan en patrones.</div>
+                  <div class="freq-card-tag">cada lunes</div>
+                </div>
+                <div class="freq-card">
+                  <div class="freq-card-num">02</div>
+                  <div class="freq-card-name">Pulso quincenal</div>
+                  <div class="freq-card-meta">Producto y negocio. Conecta uso real con ARR, NSM y avance de OKRs.</div>
+                  <div class="freq-card-tag">cada 2 semanas</div>
+                </div>
+                <div class="freq-card">
+                  <div class="freq-card-num">03</div>
+                  <div class="freq-card-name">Estatus mensual</div>
+                  <div class="freq-card-meta">Consolida 4 semanas. Separa señales puntuales de patrones relevantes.</div>
+                  <div class="freq-card-tag">día 1 del mes</div>
+                </div>
+                <div class="freq-card">
+                  <div class="freq-card-num">04</div>
+                  <div class="freq-card-name">Estatus trimestral</div>
+                  <div class="freq-card-meta">Mirada estratégica del Q. Aprendizajes y foco del siguiente trimestre.</div>
+                  <div class="freq-card-tag">cierre de Q</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="boletin" data-b="semanal">
+          <div class="slk-top">
+            <div class="slk-top-row"><span style="color:#7a7e89;font-size:13px">#</span><span class="slk-ch">hiring-producto</span></div>
+            <div class="slk-desc">Radar semanal de operación — detecta cambios tempranos en uso, fricción y rendimiento antes de que escalen.</div>
+          </div>
+          <div class="slk-msg">
+            <div class="slk-who"><div class="slk-av">EG</div><div><span class="slk-nm">Elkin Garcia</span><span class="slk-ts">Lun 19:55</span></div></div>
+            <div class="slk-b">
+              <span class="sh">📊 HIRING · RADAR SEMANAL DE PRODUCTO</span><br>
+              <span class="sb">📅 Corte: 23 de junio de 2026 · 2026-W26</span><br>
+              <span class="sm">🔍 Experiencia, adopción, recurrencia, funnel y fricción</span><br>
+              <span class="sm">✨ Interpretación asistida por Claude y contrastada con métricas determinísticas de PostHog.</span>
+              <span class="sdiv"></span>
+              <div class="ss"><span class="sh">🧭 LECTURA EJECUTIVA</span><br>
+              <span class="sy">🟡 Seguimiento recomendado</span><br><br>
+              Adopción acelerada de features clave compensada por fricción técnica persistente en flujos críticos<br><br>
+              Incremento en intensidad de uso y adopción de features clave, especialmente Revisión de candidatos y CV Import. Fricción persistente en rutas de detalle de vacante y dashboard vinculada a errores 404. Mejora en conversión del funnel de creación de vacantes. Datos incompletos afectan 27% de usuarios.<br><br>
+              ¿Por qué importa? Conviene leer alcance, eficiencia y fricción como señales distintas antes de decidir cambios de producto.<br><br>
+              <span class="so">⚠️ Principal alerta: La fricción continúa concentrada en Detalle de vacante, Dashboard de vacantes, Configuración de vacante.</span></div>
+              <span class="sdiv"></span>
+              <div class="ss"><span class="sh">💓 PULSO DE LA SEMANA</span><br>
+              👤 Usuarios: <span class="sv">44</span> · <span class="sr">🔴 ▼ -8,33%</span> · vs. 48<br>
+              🏢 Empresas: <span class="sv">18</span> · <span class="sm">⚪ → 0,00%</span> · vs. 18<br>
+              💻 Sesiones: <span class="sv">288</span> · <span class="sg">🟢 ▲ +9,09%</span> · vs. 264<br>
+              ⚡ Acciones clave: <span class="sv">1.359</span> · <span class="sg">🟢 ▲ +35,63%</span> · vs. 1.002<br><br>
+              Sesiones con una acción clave<br>
+              Antes ████░░░░░░ 41,29%<br>
+              Ahora █████░░░░░ 46,53% · <span class="sg">▲ +5,24 pp</span></div>
+              <span class="sdiv"></span>
+              <div class="ss"><span class="sh">🧩 USO DE FUNCIONALIDADES</span><br><br>
+              <span class="sv">██████████ Revisión de candidatos</span><br>
+              29 usuarios · 13 empresas · alcance 65,91% <span class="sg">▲ +22,16 pp</span><br>
+              ↳ ↑ mayor alcance · intensidad 32,95 → 30,79 eventos/usuario · <span class="sr">🔴 ▼ -6,56%</span><br><br>
+              <span class="sv">█████░░░░░ Creación y edición de vacantes</span><br>
+              15 usuarios · 7 empresas · alcance 34,09% <span class="sg">▲ +4,92 pp</span><br>
+              ↳ → estable · intensidad 2,86 → 3,47 eventos/usuario · <span class="sg">🟢 ▲ +21,33%</span><br><br>
+              <span class="sv">████░░░░░░ Preguntas de Serena</span><br>
+              13 usuarios · 7 empresas · alcance 29,55% <span class="sg">▲ +6,63 pp</span><br>
+              ↳ → estable · intensidad 6,45 → 5,54 eventos/usuario · <span class="sr">🔴 ▼ -14,11%</span><br><br>
+              <span class="sv">████░░░░░░ Importación de CV</span><br>
+              11 usuarios · 7 empresas · alcance 25,00% <span class="sg">▲ +10,42 pp</span><br>
+              ↳ ↑ mayor alcance · intensidad 14,00 → 22,00 eventos/usuario · <span class="sg">🟢 ▲ +57,14%</span><br><br>
+              <span class="sv">███░░░░░░░ Movimiento de candidatos</span><br>
+              10 usuarios · 6 empresas · alcance 22,73% <span class="sg">▲ +12,31 pp</span><br>
+              ↳ ↑ mayor alcance · intensidad 12,20 → 7,60 eventos/usuario · <span class="sr">🔴 ▼ -37,70%</span><br><br>
+              🔍 Lectura: Revisión de candidatos y Creación y edición de vacantes ganaron alcance. No se observan caídas fuertes de alcance en las funcionalidades principales.</div>
+              <span class="sdiv"></span>
+              <div class="ss"><span class="sh">🔀 FUNNEL DE CREACIÓN DE VACANTES</span><br>
+              ██████████ Información básica · 32 sesiones · 100,00% desde el inicio<br>
+              ████████░░ Configuración · 25 sesiones · 78,13% desde el inicio<br>
+              ███████░░░ Añadir miembros · 21 sesiones · 65,63% desde el inicio<br>
+              ███████░░░ Publicación · 21 sesiones · 65,63% desde el inicio<br><br>
+              <span class="so">⚠️ Mayor pérdida: antes de Configuración · 7 sesiones · 21,88%</span><br>
+              📉 Entrada al funnel: 28 → 32 · <span class="sg">🟢 ▲ +14,29%</span><br>
+              📈 Conversión a publicación: 64,29% → 65,63% · <span class="sg">▲ +1,34 pp</span><br>
+              ✅ Vacante creada: 56,25% · <span class="sr">▼ -4,46 pp</span><br>
+              ⏱ Tiempo promedio: 12,81 min<br><br>
+              🔍 Lectura: Entraron más sesiones al flujo y la conversión a publicación mejoró levemente, aunque la creación final bajó frente a la semana anterior.<br><br>
+              ¿Por qué importa? La entrada y la publicación mejoraron levemente, pero la creación final bajó; por eso conviene seguir activación, eficiencia y cierre del funnel por separado.</div>
+              <span class="sdiv"></span>
+              <div class="ss"><span class="sh">🔁 RECURRENCIA Y CONTINUIDAD</span><br>
+              👤 Retención semanal de usuarios: <span class="sv">58,33%</span> · <span class="sg">▲ +0,33 pp</span><br>
+              🏢 Retención semanal de empresas: <span class="sv">77,78%</span> · <span class="sm">→ 0,00 pp</span><br>
+              📅 Usuarios activos en varios días: <span class="sv">56,82%</span><br>
+              ♻️ 5 usuarios reactivados · 11 sin actividad previa visible<br><br>
+              🔍 Lectura: La continuidad se mantiene estable: usuarios casi igual y empresas sin variación. Conviene observar si el mayor uso multidía se sostiene la próxima semana.</div>
+              <span class="sdiv"></span>
+              <div class="ss"><span class="sh">⚠️ FRICCIÓN POR PANTALLA</span><br><br>
+              1. <span class="so">████████░░ Detalle de vacante · 77,46% · <span class="sg">▲ +3,05 pp</span></span><br>
+              189 de 244 sesiones · 180 con dead clicks · 14 con rage clicks · 130 con 404<br>
+              🎬 Ver evidencia: AK Drilling Perú<br><br>
+              2. <span class="so">████████░░ Dashboard de vacantes · 78,87% · <span class="sr">▼ -8,14 pp</span></span><br>
+              153 de 194 sesiones · 27 con dead clicks · 0 con rage clicks · 145 con 404<br>
+              🎬 Ver evidencia: Incubadora Santander - Huevos Kikes<br><br>
+              3. <span class="so">████████░░ Configuración de vacante · 84,62% · <span class="sg">▲ +2,01 pp</span></span><br>
+              22 de 26 sesiones · 22 con dead clicks · 9 con rage clicks · 0 con 404<br>
+              🎬 Ver evidencia: Sofratesa<br><br>
+              🔍 Lectura: Las tasas continúan siendo inusualmente altas. Primero debemos validar la medición, el ruteo y posibles causas técnicas antes de proponer cambios de interfaz.<br><br>
+              <span class="sy">⚠️ Dead clicks, rage clicks y señales 404 son evidencia por validar, no causas demostradas.</span></div>
+              <span class="sdiv"></span>
+              <div class="ss"><span class="sh">🏢 EMPRESAS CON MAYOR SEÑAL DE RIESGO</span><br><br>
+              🎫 Tickets / soporte<br>
+              ⚪ Sin data estructurada suficiente de tickets por empresa en este corte.<br><br>
+              📊 Datos de uso / fricción<br>
+              <span class="so">🟠 AK Drilling Perú · Ruta o estado inválido · 159 dead clicks · 11 rage clicks · 2 errores 404 · 181 errores de consola</span><br>
+              <span class="so">🟠 Incubadora Santander - Huevos Kikes · Fricción en workflows · 108 dead clicks · 1 rage click · 67 errores 404 · 380 errores de consola</span><br>
+              <span class="so">🟠 Sofratesa · Frustración en creación de vacante · 58 dead clicks · 8 rage clicks · 2 errores 404 · 77 errores de consola</span><br><br>
+              🔍 Lectura: El foco no es listar todas las empresas, sino identificar cuáles requieren revisión prioritaria por acumulación de señales.</div>
+              <span class="sdiv"></span>
+              <div class="ss"><span class="sh">🎯 HALLAZGOS Y ACCIONES</span><br><br>
+              1. Auditar la medición de fricción en Detalle y Dashboard mediante una muestra manual y contraste con logs técnicos.<br>
+              Responsable: Datos + Ingeniería · Estado: Abierta · 0%<br><br>
+              2. Segmentar el menor alcance de Revisión de candidatos antes de iniciar entrevistas o proponer cambios de diseño.<br>
+              Responsable: Producto + Datos · Estado: Abierta · 0%<br><br>
+              3. Auditar la instrumentación de eventos en el funnel de creación de vacantes para asegurar la correcta captura de cada paso.<br>
+              Responsable: Datos · Estado: Abierta · 0%<br><br>
+              4. Revisar el código y la lógica de navegación que genera la ruta '/recruitment/job/dashboard/undefined' y otros errores de ruta inválida.<br>
+              Responsable: Ingeniería · Estado: Abierta · 0%<br><br>
+              5. Segmentar a los usuarios activos para entender qué perfiles están impulsando el aumento en la tasa de usuarios con acción clave.<br>
+              Responsable: Producto · Estado: Abierta · 0%</div>
+              <span class="sdiv"></span>
+              <div class="ss"><span class="sh">👀 MONITOREAR LA PRÓXIMA SEMANA</span><br>
+              • Usuarios activos · objetivo: aumentar<br>
+              • Sesiones con una acción clave · objetivo: aumentar<br>
+              • Sesiones que inician la creación de vacantes · objetivo: aumentar<br>
+              • Alcance de Revisión de candidatos · objetivo: aumentar<br>
+              • Sesiones con señal 404 en Dashboard · objetivo: disminuir</div>
+              <span class="sdiv"></span>
+              <div class="ss"><span class="sh">✅ CIERRE</span><br>
+              Priorizar auditoría de dead clicks y errores 404 en pantallas con alta fricción. Validar si las mejoras del funnel se sostienen y si la medición refleja comportamiento real. Resolver data quality (27% sin identidad) para métricas confiables.<br><br>
+              La prioridad es sostener la entrada y la conversión, mientras se valida técnicamente la fricción persistente.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="boletin" data-b="quincenal">
+          <div class="slk-top">
+            <div class="slk-top-row"><span style="color:#7a7e89;font-size:13px">#</span><span class="slk-ch">hiring-producto</span></div>
+            <div class="slk-desc">Pulso quincenal de producto — conecta uso real con avance de OKRs e informa decisiones de roadmap.</div>
+          </div>
+          <div class="slk-msg">
+            <div class="slk-who"><div class="slk-av">EG</div><div><span class="slk-nm">Elkin Garcia</span><span class="slk-ts">Jue 18:59</span></div></div>
+            <div class="slk-b">
+              <span class="sh">📊 HIRING · PULSO QUINCENAL</span><br>
+              <span class="sb">📅 Corte: 05 jun 2026 · 2026-W23</span><br>
+              <span class="sm">⌛ Periodo parcial del mes</span>
+              <span class="sdiv"></span>
+              <div class="ss"><span class="sh">🧭 LECTURA EJECUTIVA</span><br><br>
+              <span class="sy">🟡 Adopción estable, con espacio para ampliar la activación</span><br>
+              30 empresas activas · 27 empresas con usabilidad · 23 aparecen como referencia operativa de NSM<br>
+              ¿Por qué importa? El producto logra uso en casi toda la base activa, pero solo 9 empresas crearon vacantes; todavía existe espacio para ampliar la activación real.<br><br>
+              <span class="sg">🟢 Mayor actividad operativa</span><br>
+              Vacantes Sin referencia · Candidatos Sin referencia · Serena Sin referencia<br>
+              ¿Por qué importa? El aumento se concentra en la ejecución: las empresas que ya usan HIRING están profundizando su actividad dentro del producto.<br><br>
+              <span class="so">🟠 Brecha en habilitadores de negocio</span><br>
+              Avance ponderado de OKRs: 64,4% · Incrementar ARR de usabilidad de 0,92% a 1,67%: actualmente en 1,13% de avance, requiere cerrar brecha de 98,87% hacia la meta.<br>
+              ¿Por qué importa? Cerrar esta brecha es necesario para habilitar el nuevo pricing y convertir el uso del producto en una oportunidad comercial más escalable.</div>
+              <span class="sdiv"></span>
+              <div class="ss"><span class="sh">📌 PULSO DEL PERIODO</span><br>
+              <span class="sm">Las variaciones comparan con el corte anterior. Los valores operativos son acumulados dentro del mes.</span><br><br>
+              🏢 Empresas con producto activo: <span class="sv">30</span> · Sin referencia<br>
+              💼 Empresas que crearon vacantes: <span class="sv">9</span> · Sin referencia<br>
+              📝 Vacantes creadas: <span class="sv">20</span> · Sin referencia<br>
+              👥 Candidatos cargados: <span class="sv">47</span> · Sin referencia<br>
+              🔄 Movimientos de candidatos: <span class="sv">1.379</span> · Sin referencia<br>
+              🎙 Entrevistas realizadas con Serena: <span class="sv">276</span> · Sin referencia<br><br>
+              🔍 Qué representa: El aumento se concentra en la ejecución operativa: más empresas crean vacantes y quienes ya participan gestionan un mayor volumen de candidatos y entrevistas.</div>
+              <span class="sdiv"></span>
+              <div class="ss"><span class="sh">⭐ NSM · REFERENCIA OPERATIVA</span><br><br>
+              <span class="sv">23 empresas aparecen como referencia operativa de NSM</span><br>
+              ARR asociado: <span class="sg">$286,589</span><br><br>
+              Qué significa: Esta referencia ayuda a distinguir empresas con uso sostenido dentro del snapshot frente a empresas que solo tienen el producto habilitado.<br><br>
+              ¿Por qué importa? Permite monitorear adopción operativa sin presentarla como medición oficial ni usarla para comparaciones históricas.<br><br>
+              <span class="sy">⚠️ No se debe comparar históricamente porque este snapshot no contiene el NSM oficial de BigQuery.</span></div>
+              <span class="sdiv"></span>
+              <div class="ss"><span class="sh">⚙️ OPERACIÓN DE HIRING</span><br><br>
+              <span class="sv">Vacantes</span><br>
+              20 creadas → 19 publicadas → 0 cerradas<br>
+              Lectura: 95% de las vacantes creadas están publicadas; esto muestra avance operativo dentro del proceso.<br><br>
+              <span class="sv">Candidatos</span><br>
+              47 cargados · 1.379 movimientos · 15 empresas<br>
+              Lectura: El volumen de movimientos muestra gestión recurrente, aunque no equivale a candidatos únicos.<br><br>
+              <span class="sv">Serena</span><br>
+              276 entrevistas · 14 empresas · puntaje 8,4<br>
+              Lectura: Serena mantiene un volumen relevante de uso y una valoración positiva entre las empresas participantes.<br><br>
+              <span class="sv">Riesgo de uso</span><br>
+              21 con señal reciente · 2 inactivas por más de 3 meses<br>
+              Lectura: La disminución de actividad es una señal preventiva; no representa una pérdida confirmada del cliente.<br><br>
+              ¿Por qué importa? La operación muestra si el producto se usa de forma recurrente y ayuda a detectar dónde profundizar adopción o intervenir ante una caída de actividad.</div>
+              <span class="sdiv"></span>
+              <div class="ss"><span class="sh">📈 ADOPCIÓN</span><br><br>
+              Base vigente → Producto activo<br>
+              ░░░░░░░░░░ 3,4% · 30 empresas<br><br>
+              Producto activo → Usabilidad<br>
+              █████████░ 90% · 27 empresas<br><br>
+              Producto activo → Crearon vacantes<br>
+              ███░░░░░░░ 30% · 9 empresas<br><br>
+              Producto activo → Cargaron candidatos<br>
+              █████░░░░░ 50% · 15 empresas<br><br>
+              Producto activo → Movieron candidatos<br>
+              █████░░░░░ 53,3% · 16 empresas<br><br>
+              Producto activo → NSM (referencia)<br>
+              ████████░░ 76,7% · 23 empresas<br><br>
+              🔍 Lectura: La usabilidad general es alta, pero la creación de vacantes alcanza a 30% de las empresas activas.<br><br>
+              ¿Por qué importa? Crear una vacante es una de las principales puertas de entrada al valor de HIRING y puede ampliar después el uso de candidatos, Serena y otras funcionalidades.</div>
+              <span class="sdiv"></span>
+              <div class="ss"><span class="sh">🟠 RENTABILIDAD PRELIMINAR</span><br><br>
+              💵 ARR distribuido: <span class="sv">$6,721</span><br>
+              💳 Gasto registrado: <span class="sv">$0</span><br>
+              📉 Balance acumulado: <span class="sr">-$25,154</span><br>
+              📊 Recuperación del gasto: <span class="sy">73,14%</span><br>
+              🎯 Brecha de equilibrio: <span class="sv">$25,154</span><br>
+              ⏱ Payback estimado: <span class="sv">3,7 meses</span><br><br>
+              🔍 Lectura: La recuperación del gasto avanza, pero el balance acumulado continúa siendo negativo.<br><br>
+              ¿Por qué importa? HIRING necesita combinar adopción, profundidad de uso y habilitadores comerciales para acercarse al equilibrio.<br><br>
+              <span class="sy">⚠️ El gasto registrado en cero no significa que la operación sea gratuita. La lectura continúa siendo preliminar.</span></div>
+              <span class="sdiv"></span>
+              <div class="ss"><span class="sh">💬 SEÑALES DE CLIENTE Y OPERACIÓN</span><br><br>
+              <span class="sy">🟡 Feedback</span><br>
+              2 registros fechados · 2 abiertos · 0 resueltos<br>
+              Enfoque principal: Requisición y sistema de selección y Agente de documentación.<br>
+              Lectura: 2 solicitudes abiertas de Grupo Tiendas Asociadas centradas en optimización de tiempos de selección y documentación de agentes.<br><br>
+              <span class="sy">🟡 Implementación y soporte</span><br>
+              3 casos fechados · 3 activos · 0 resueltos<br>
+              Enfoque operativo: Requisición y sistema de selección, Agente de documentación, Importación de CVs.<br>
+              Lectura: 3 casos operativos pendientes relacionados con requisición, documentación e importación de CVs.<br><br>
+              <span class="sy">🟡 Tickets técnicos</span><br>
+              1 activos · 0 finalizados<br>
+              Enfoque técnico: Importación de CVs.<br>
+              Caso destacado: Galgo reportó una falla asociada a Importación de CVs; La importación de CVs quedó en proceso y no importaron.<br><br>
+              🔍 Lectura: Las señales cualitativas se concentran en dos frentes: optimizar el proceso de selección/documentación y resolver fricciones en importación de CVs.</div>
+              <span class="sdiv"></span>
+              <div class="ss"><span class="sh">🟡 OKRs · AVANCE Y BRECHA</span><br><br>
+              Avance ponderado: <span class="sv">64,4%</span><br>
+              ██████░░░░<br>
+              Pendiente: 35,6%<br><br>
+              ✅ Principal avance<br>
+              Agente de Roleplay completado al 100%: agente habilitado dentro de creación de plantillas para configuración bajo necesidades del cliente.<br><br>
+              📉 Mayor brecha<br>
+              Incrementar ARR de usabilidad de 0,92% a 1,67%: actualmente en 1,13% de avance, requiere cerrar brecha de 98,87% hacia la meta.<br><br>
+              🧭 Metas pendientes de definición: 1 meta<br>
+              Generar $XXK a través del módulo de reclutamiento: meta de negocio sin cifra definida aún.<br><br>
+              ¿Por qué importa? Sin una meta definida no es posible medir claramente el avance ni determinar si las acciones comerciales están funcionando.</div>
+              <span class="sdiv"></span>
+              <div class="ss"><span class="sh">🎯 PRIORIDADES · Ampliar activación de vacantes y fortalecer la base de NSM</span><br><br>
+              Solo 30% de empresas activas han creado vacantes pese a 90% con usabilidad confirmada. Enfoque inmediato en convertir uso en creación de vacantes. Mantener profundidad en candidatos y Serena. Dar seguimiento a señal de pérdida reciente en 80% de pagantes, ticket de importación de CVs y feedback de Grupo Tiendas Asociadas.<br><br>
+              1. Ampliar la activación de vacantes<br>
+              Lograr que más empresas pasen de tener el producto habilitado a iniciar procesos reales.<br><br>
+              2. Mantener la profundidad operativa<br>
+              Sostener el uso recurrente en candidatos, movimientos y entrevistas con Serena.<br><br>
+              3. Resolver señales de cliente y operación<br>
+              Dar seguimiento al feedback de Grupo Tiendas Asociadas y al ticket de importación de CVs de Galgo.<br><br>
+              4. Monitorear riesgo de uso y NSM<br>
+              Revisar empresas con caída reciente y tratar el NSM como referencia operativa mientras no esté disponible la medición oficial.</div>
+              <span class="sdiv"></span>
+              <div class="ss"><span class="sh">✅ CIERRE</span><br>
+              HIRING muestra mayor actividad operativa entre cortes y un nivel de adopción relevante entre las empresas activas.<br><br>
+              El principal reto no está solamente en aumentar el volumen, sino en ampliar la cantidad de empresas que activan el producto, mantener su recurrencia y convertir ese uso en resultados sostenibles para el negocio.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="boletin" data-b="mensual">
+          <div class="slk-top">
+            <div class="slk-top-row"><span style="color:#7a7e89;font-size:13px">#</span><span class="slk-ch">hiring-producto</span></div>
+            <div class="slk-desc">Estatus ejecutivo mensual — consolida las señales del mes y separa lo puntual de lo estructural.</div>
+          </div>
+          <div class="slk-msg">
+            <div class="slk-who"><div class="slk-av">EG</div><div><span class="slk-nm">Elkin Garcia</span><span class="slk-ts">Mar 20:41</span></div></div>
+            <div class="slk-b">
+              <span class="sh">📊 HIRING · ESTATUS MENSUAL DE PRODUCTO</span><br>
+              <span class="sb">📅 Corte: 2026-06-23 · Junio 2026 · mes parcial</span><br>
+              <span class="sm">🔍 Adopción · Uso · Fricción · Operación · Negocio · Feedback</span>
+              <span class="sdiv"></span>
+              <div class="ss"><span class="sh">🧭 ESTADO GENERAL DEL MES</span><br>
+              <span class="so">🟠 Atención prioritaria</span><br><br>
+              HIRING muestra más actividad operativa, pero todavía necesita resolver señales importantes en experiencia, datos y habilitadores de negocio.<br><br>
+              <span class="sy">🟡 Adopción</span><br>
+              719 sesiones · 79 usuarios · 24 empresas en PostHog<br>
+              28 empresas con producto activo<br>
+              Sesiones ↑ 8,45% · Usuarios ↓ -3,66% · Empresas →<br><br>
+              <span class="sg">🟢 Operación</span><br>
+              59 vacantes · 48 publicadas · 149 candidatos<br>
+              3.338 movimientos · 522 entrevistas Serena<br><br>
+              <span class="so">🟠 Fricción</span><br>
+              61,34% sesiones con dead clicks<br>
+              69,82% sesiones con señal 404<br>
+              4 rutas inválidas detectadas<br><br>
+              <span class="so">🟠 Datos</span><br>
+              49,37% usuarios sin identidad o empresa confiable<br>
+              1/3 snapshots semanales disponibles<br><br>
+              <span class="sy">🟡 Negocio</span><br>
+              17 empresas cumplen NSM<br>
+              ARR asociado: $212,794<br>
+              OKRs: 56,8% avance general<br><br>
+              Lectura rápida: Hay uso real del producto, especialmente en vacantes, candidatos y Serena. El reto está en ampliar la activación, validar la fricción técnica y conectar mejor el uso con resultados de negocio.</div>
+              <span class="sdiv"></span>
+              <div class="ss"><span class="sh">📊 PULSO VISUAL DEL MES</span><br><br>
+              Uso general<br>
+              ▰▰▰▰▰▱▱▱ 719 sesiones · ↑ 8,45%<br><br>
+              Acción clave<br>
+              ▰▰▰▰▱▱▱▱ 45,48% sesiones con acción clave<br><br>
+              Fricción<br>
+              ▰▰▰▰▰▱▱▱ 61,34% dead clicks<br><br>
+              Operación<br>
+              ▰▰▰▰▰▰▱▱ 59 vacantes · 149 candidatos · 522 entrevistas<br><br>
+              OKRs<br>
+              ▰▰▰▰▰▱▱▱ 56,8% avance general</div>
+              <span class="sdiv"></span>
+              <div class="ss"><span class="sh">🏢 ADOPCIÓN Y ALCANCE</span><br><br>
+              PostHog<br>
+              👤 Usuarios: <span class="sv">79</span> · <span class="sr">↓ -3,66%</span><br>
+              🏢 Empresas: <span class="sv">24</span> · <span class="sm">→ sin cambio</span><br>
+              💻 Sesiones: <span class="sv">719</span> · <span class="sg">↑ 8,45%</span><br>
+              ⚡ Sesiones con acción clave: <span class="sv">45,48%</span><br><br>
+              BigQuery<br>
+              🏢 Empresas producto activo: <span class="sv">28</span><br>
+              💼 Empresas que crearon vacantes: <span class="sv">15</span><br>
+              ⭐ Empresas NSM: <span class="sv">17</span><br><br>
+              Lectura: Más sesiones no necesariamente significan más adopción. El uso parece estar concentrado en menos usuarios y empresas.</div>
+              <span class="sdiv"></span>
+              <div class="ss"><span class="sh">🧩 USO DE FUNCIONALIDADES</span><br><br>
+              1️⃣ Revisión de candidatos<br>
+              ██████░░░░ 26 usuarios · 13 empresas · 56,52% alcance<br>
+              Funcionalidad principal del producto.<br><br>
+              2️⃣ Creación y edición de vacantes<br>
+              ████░░░░░░ 16 usuarios · 8 empresas · 34,78% alcance<br>
+              Mejora en alcance, pero todavía puede crecer.<br><br>
+              3️⃣ Preguntas de Serena<br>
+              ███░░░░░░░ 13 usuarios · 7 empresas · 28,26% alcance<br>
+              Uso relevante, aunque con menor intensidad.<br><br>
+              4️⃣ Importación de CV<br>
+              ██░░░░░░░░ 7 usuarios · 7 empresas · 15,22% alcance<br>
+              Baja adopción; requiere seguimiento.<br><br>
+              5️⃣ Configuración de Serena<br>
+              █░░░░░░░░░ 6 usuarios · 5 empresas · 13,04% alcance<br>
+              Bajo alcance e intensidad menor.<br><br>
+              Lectura: El uso se concentra en candidatos, vacantes y Serena. Las señales cualitativas deben ayudar a explicar si los cambios de adopción responden a demanda, recurrencia, fricción o problemas técnicos.</div>
+              <span class="sdiv"></span>
+              <div class="ss"><span class="sh">🔀 FUNNEL DE CREACIÓN DE VACANTES</span><br><br>
+              Información básica<br>
+              ██████████ 30 sesiones · 100%<br><br>
+              Configuración<br>
+              ███████░░░ 22 sesiones · 73,33%<br><br>
+              Añadir miembros<br>
+              ███████░░░ 21 sesiones · 70%<br><br>
+              Publicación<br>
+              ███████░░░ 21 sesiones · 70%<br><br>
+              <span class="so">⚠️ Mayor pérdida: Antes de Configuración · 8 sesiones · 26,67%</span><br>
+              📉 Entrada al funnel: 44 → 30 · <span class="sr">▼ -31,82%</span><br>
+              📈 Conversión a publicación: 63,64% → 70% · <span class="sg">▲ +6,36 pp</span><br>
+              ✅ Vacante creada: 63,33% · <span class="sg">▲ +6,51 pp</span><br>
+              ⏱ Tiempo promedio: 9,93 min<br><br>
+              Lectura: Menos sesiones entraron al flujo, pero quienes entraron avanzaron mejor. La caída antes de Configuración debe cruzarse con feedback y tickets para entender si responde a fricción, dudas, errores técnicos o instrumentación.</div>
+              <span class="sdiv"></span>
+              <div class="ss"><span class="sh">⚙️ OPERACIÓN DEL PRODUCTO</span><br><br>
+              Vacantes<br>
+              59 creadas → 48 publicadas → 3 cerradas<br>
+              ████████░░ 81,4% publicadas<br><br>
+              Candidatos<br>
+              149 cargados · 3.338 movimientos · 17 empresas<br>
+              ██████░░░░ 60,7% empresas activas con candidatos<br><br>
+              Serena<br>
+              522 entrevistas · 15 empresas · puntaje 8,92<br>
+              █████░░░░░ 53,6% empresas activas con uso Serena<br><br>
+              Riesgo de uso<br>
+              6 empresas con señal reciente<br>
+              2 empresas inactivas por más de 3 meses<br><br>
+              Lectura: La operación crece. El foco debe estar en activar más empresas, cuidar señales tempranas de riesgo y contrastar el volumen con percepción real de valor.</div>
+              <span class="sdiv"></span>
+              <div class="ss"><span class="sh">⚠️ MAPA DE FRICCIÓN</span><br><br>
+              Detalle de vacante<br>
+              ████████░░ 76,39% fricción<br>
+              216 sesiones · 159 dead clicks · 14 rage clicks · 111 con 404<br>
+              🎬 Evidencia PostHog: Genomma Lab · Ver replay<br><br>
+              Dashboard de vacantes<br>
+              █████████░ 86,34% fricción<br>
+              183 sesiones · 38 dead clicks · 3 rage clicks · 152 con 404<br>
+              🎬 Evidencia PostHog: AK Drilling Chile · Ver replay<br><br>
+              Configuración de vacante<br>
+              █████████░ 91,3% fricción<br>
+              23 sesiones · 21 dead clicks · 9 rage clicks · 0 con 404<br>
+              🎬 Evidencia PostHog: Sofratesa · Ver replay<br><br>
+              Lectura: La fricción es alta y recurrente en pantallas clave. Los replays deben revisarse junto con logs, tickets y feedback para confirmar si la causa es técnica, de ruteo, de medición o de experiencia.</div>
+              <span class="sdiv"></span>
+              <div class="ss"><span class="sh">⭐ NSM, NEGOCIO Y OKRs</span><br><br>
+              NSM oficial<br>
+              17 empresas cumplen NSM<br>
+              ██████░░░░ 60,7% de empresas activas<br><br>
+              ARR asociado: <span class="sg">$212,794</span><br><br>
+              Avance general OKRs<br>
+              ██████░░░░ 56,8% completado<br>
+              Pendiente: 43,2%<br><br>
+              Principal avance: Nuevo agente para Roleplays en Serena<br>
+              ████████░░ 80%<br><br>
+              Mayor brecha: Sistema de créditos de reclutamiento<br>
+              ░░░░░░░░░░ 0%<br><br>
+              Meta pendiente: 1 meta de ARR del módulo aún sin definición<br><br>
+              Lectura: HIRING tiene señales de uso significativo, pero todavía necesita avanzar en habilitadores comerciales para conectar mejor adopción, pricing y monetización.</div>
+              <span class="sdiv"></span>
+              <div class="ss"><span class="sh">💬 FEEDBACK, SOPORTE Y TICKETS</span><br><br>
+              Feedback más mencionado: sin registros consolidados<br><br>
+              Feedback más relevante para producto: sin evidencia consolidada suficiente<br><br>
+              Tickets técnicos más relacionados: sin data estructurada suficiente de tickets por empresa en este corte<br><br>
+              Cruce con datos del boletín<br>
+              PostHog muestra: fricción alta en Detalle de vacante, Dashboard de vacantes y Configuración de vacante.<br>
+              Feedback/tickets indican: sin evidencia consolidada suficiente para explicar causa.<br>
+              Prioridad sugerida: <span class="so">alta</span><br><br>
+              Lectura: El feedback y los tickets deben ayudar a explicar si las señales del boletín responden a un problema técnico, una barrera de experiencia, baja demanda o una necesidad de acompañamiento.</div>
+              <span class="sdiv"></span>
+              <div class="ss"><span class="sh">🏢 EMPRESAS CON MAYOR SEÑAL DE RIESGO</span><br><br>
+              🎫 Tickets / soporte<br>
+              ⚪ Sin data estructurada suficiente de tickets por empresa en este corte.<br><br>
+              📊 Datos de uso / fricción<br>
+              <span class="so">🟠 Genomma Lab · Detalle de vacante · score 332 · 106 dead clicks · 60 errores 404</span><br>
+              <span class="so">🟠 Sofratesa · Configuración de vacante · score 99 · 42 dead clicks · 5 rage clicks</span><br>
+              <span class="sy">🟡 AK Drilling Chile · Dashboard de vacantes · score 8 · 2 dead clicks · 2 errores 404</span><br><br>
+              🔍 Lectura: El foco no es listar todas las empresas. En este corte no hay tickets estructurados por empresa; por eso la priorización se apoya en señales de uso/fricción y debe validarse con replays.</div>
+              <span class="sdiv"></span>
+              <div class="ss"><span class="sh">🎯 PRIORIDADES DEL SIGUIENTE CICLO</span><br><br>
+              1️⃣ Validar fricción técnica<br>
+              Revisar dead clicks, rage clicks, 404 y rutas inválidas con replays + logs + tickets.<br><br>
+              2️⃣ Recuperar entrada al funnel<br>
+              Aumentar sesiones que inician creación de vacante.<br><br>
+              3️⃣ Ampliar activación de vacantes<br>
+              Lograr que más empresas pasen de producto activo a vacante creada.<br><br>
+              4️⃣ Mejorar calidad de datos<br>
+              Reducir usuarios sin identidad y mejorar asociación con empresa.<br><br>
+              5️⃣ Avanzar sistema de créditos<br>
+              Desbloquear pricing y oportunidad comercial.<br><br>
+              6️⃣ Fortalecer evidencia cualitativa<br>
+              Consolidar feedback, soporte y tickets para explicar mejor las causas detrás de los datos.</div>
+              <span class="sdiv"></span>
+              <div class="ss"><span class="sh">✅ CIERRE</span><br>
+              HIRING cierra el corte parcial con señales positivas de operación: más vacantes, más candidatos y alto uso de Serena.<br><br>
+              El foco del próximo ciclo debe ser ampliar activación, recuperar entrada al funnel, validar la fricción técnica, mejorar la calidad de datos y conectar mejor el uso con evidencia cualitativa y habilitadores de negocio.<br><br>
+              <span class="sm">Lectura mensual asistida por Claude y controlada con métricas determinísticas. Las señales técnicas son indicios por validar, no causas confirmadas.</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="boletin" data-b="trimestral">
+          <div class="slk-top">
+            <div class="slk-top-row"><span style="color:#7a7e89;font-size:13px">#</span><span class="slk-ch">hiring-producto</span></div>
+            <div class="slk-desc">Cierre de Q — mirada estratégica del trimestre, aprendizajes clave y foco para el siguiente período.</div>
+          </div>
+          <div class="slk-msg">
+            <div class="slk-who"><div class="slk-av">EG</div><div><span class="slk-nm">Elkin Garcia</span><span class="slk-ts">Jun 19 17:23</span></div></div>
+            <div class="slk-b">
+              <span class="sh">📊 HIRING · ESTATUS TRIMESTRAL DE PRODUCTO</span><br>
+              <span class="sb">📅 Q2 2026 · abr – jun · Corte: 18 jun 2026</span><br>
+              <span class="sm">🔍 Adopción · Uso · Fricción · Operación · Negocio · Feedback · Foco siguiente Q</span>
+              <span class="sdiv"></span>
+              <div class="ss"><span class="sh">🧭 ESTADO GENERAL DEL Q</span><br>
+              <span class="so">🟠 Atención prioritaria</span><br><br>
+              HIRING muestra uso real y actividad operativa, pero necesita crecer con mejor activación, menos fricción, datos más confiables y mayor conexión con negocio.<br><br>
+              <span class="sy">🟡 Adopción</span><br>
+              Usuarios: abr: sin dato → may: sin dato → jun: 46<br>
+              Empresas: abr: sin dato → may: sin dato → jun: 29<br>
+              Sesiones: abr: sin dato → may: sin dato → jun: 261<br>
+              Estado: lectura parcial<br><br>
+              <span class="sg">🟢 Operación</span><br>
+              Vacantes: abr: sin dato → may: sin dato → jun: 70<br>
+              Candidatos: abr: sin dato → may: sin dato → jun: 159<br>
+              Serena: abr: sin dato → may: sin dato → jun: 541<br>
+              Estado: por validar<br><br>
+              <span class="so">🟠 Fricción</span><br>
+              Dead clicks: por validar · Rage clicks: por validar · 404 / rutas inválidas: por validar<br>
+              Estado: por validar con replays, logs e instrumentación<br><br>
+              <span class="so">🟠 Datos</span><br>
+              Usuarios sin identidad: jun: 23.91%<br>
+              Snapshots disponibles: 1/12<br>
+              Estado: crítico<br><br>
+              <span class="sy">🟡 Negocio</span><br>
+              NSM: jun: 17 · ARR asociado: jun: $212,793.51<br>
+              OKRs: 56,8% avance general<br>
+              Estado: parcial</div>
+              <span class="sdiv"></span>
+              <div class="ss"><span class="sh">📊 PULSO VISUAL DEL Q</span><br><br>
+              Adopción<br>
+              abr ▱▱▱▱▱▱▱▱ sin dato<br>
+              may ▱▱▱▱▱▱▱▱ sin dato<br>
+              jun ▰▰▰▰▰▰▰▰ 29 empresas<br>
+              Estado: lectura parcial<br><br>
+              Uso operativo<br>
+              abr ▱▱▱▱▱▱▱▱ sin dato<br>
+              may ▱▱▱▱▱▱▱▱ sin dato<br>
+              jun ▰▰▰▰▰▰▰▰ 70 vacantes<br>
+              Estado: por validar<br><br>
+              Fricción<br>
+              abr ▱▱▱▱▱▱▱▱ sin dato<br>
+              may ▱▱▱▱▱▱▱▱ sin dato<br>
+              jun ▰▰▰▰▰▰▰▱ 91.67%<br>
+              Estado: por validar<br><br>
+              OKRs<br>
+              abr ▱▱▱▱▱▱▱▱ sin dato<br>
+              may ▱▱▱▱▱▱▱▱ sin dato<br>
+              jun ▰▰▰▰▰▱▱▱ 56.8%<br>
+              Estado: avance parcial</div>
+              <span class="sdiv"></span>
+              <div class="ss"><span class="sh">🏢 ADOPCIÓN Y ALCANCE</span><br><br>
+              PostHog<br>
+              👤 Usuarios activos: abr: sin dato → may: sin dato → jun: <span class="sv">46</span><br>
+              🏢 Empresas activas: abr: sin dato → may: sin dato → jun: <span class="sv">29</span><br>
+              💻 Sesiones: abr: sin dato → may: sin dato → jun: <span class="sv">261</span><br>
+              ⚡ Sesiones con acción clave: abr: sin dato → may: sin dato → jun: <span class="sv">44.06%</span><br><br>
+              BigQuery<br>
+              🏢 Empresas con producto activo: <span class="sv">29</span><br>
+              💼 Empresas que crearon vacantes: <span class="sv">15</span><br>
+              ⭐ Empresas que cumplen NSM: <span class="sv">17</span><br><br>
+              Lectura: Si las sesiones crecen, pero usuarios o empresas no crecen al mismo ritmo, el uso se está profundizando en una base similar, no necesariamente expandiendo adopción.</div>
+              <span class="sdiv"></span>
+              <div class="ss"><span class="sh">🧩 USO DE FUNCIONALIDADES</span><br><br>
+              Revisión de candidatos<br>
+              ██████░░░░ 56.52% alcance Q<br>
+              Usuarios: 26 · Empresas: 13 · Estado: principal<br><br>
+              Creación y edición de vacantes<br>
+              █████░░░░░ 51.72% alcance Q<br>
+              Usuarios: sin dato · Empresas: 15 · Estado: principal<br><br>
+              Preguntas / entrevistas Serena<br>
+              █████░░░░░ 51.72% alcance Q<br>
+              Usuarios: sin dato · Empresas: 15 · Estado: principal<br><br>
+              Importación de CV<br>
+              ░░░░░░░░░░ sin dato consolidado<br>
+              Usuarios: sin dato · Empresas: sin dato · Estado: seguimiento<br><br>
+              Configuración de Serena<br>
+              ░░░░░░░░░░ sin dato consolidado<br>
+              Usuarios: sin dato · Empresas: sin dato · Estado: seguimiento<br><br>
+              Lectura: El Q debe mostrar qué funcionalidades ganaron tracción, cuáles se mantuvieron y cuáles necesitan investigación por baja adopción o caída de uso.</div>
+              <span class="sdiv"></span>
+              <div class="ss"><span class="sh">🔀 FUNNEL DE CREACIÓN DE VACANTES</span><br><br>
+              Entrada al funnel: abr: sin dato → may: sin dato → jun: 31<br>
+              Conversión a publicación: abr: sin dato → may: sin dato → jun: 70.97%<br>
+              Mayor pérdida recurrente: Paso: Configuración<br><br>
+              Vista rápida del último mes<br>
+              Información básica<br>
+              ██████████ 31 sesiones · 100%<br><br>
+              Configuración<br>
+              ███████░░░ 70.97%<br><br>
+              Añadir miembros<br>
+              ███████░░░ 70.97%<br><br>
+              Publicación<br>
+              ███████░░░ 70.97%<br><br>
+              Lectura: El análisis debe separar dos cosas: cuántos usuarios entran al funnel y qué tan bien convierten una vez entran.</div>
+              <span class="sdiv"></span>
+              <div class="ss"><span class="sh">⚙️ OPERACIÓN DEL PRODUCTO</span><br><br>
+              Vacantes: abr: sin dato → may: sin dato → jun: <span class="sv">70</span> (Total Q: 70)<br>
+              Vacantes publicadas: jun: <span class="sv">62</span> (Total Q: 62)<br>
+              Candidatos cargados: jun: <span class="sv">159</span> (Total Q: 159)<br>
+              Movimientos de candidatos: jun: <span class="sv">3.513</span> (Total Q: 3.513)<br><br>
+              Serena<br>
+              Entrevistas: jun: <span class="sv">541</span><br>
+              Empresas con uso: <span class="sv">15</span><br>
+              Puntaje promedio: <span class="sg">9</span><br><br>
+              Lectura: La operación muestra profundidad de uso. Si crece la operación pero no crece la base activa, el foco debe ser ampliar activación.</div>
+              <span class="sdiv"></span>
+              <div class="ss"><span class="sh">⚠️ MAPA DE FRICCIÓN DEL Q</span><br><br>
+              Detalle de vacante<br>
+              ████████░░ 76.53% fricción<br>
+              Dead clicks: 157 · Rage clicks: 14 · 404: 108<br>
+              Estado: por validar<br><br>
+              Dashboard de vacantes<br>
+              █████████░ 86.34% fricción<br>
+              Dead clicks: 39 · Rage clicks: 3 · 404: 152<br>
+              Estado: por validar<br><br>
+              Configuración de vacante<br>
+              █████████░ 91.67% fricción<br>
+              Dead clicks: 22 · Rage clicks: 10 · 404: sin dato<br>
+              Estado: por validar<br><br>
+              🎬 Sesiones destacadas para revisar<br>
+              1. Genomma Lab · 25.9 min activos · 1 rage click · 126 dead clicks · 283 errores de consola<br>
+              2. AK Drilling Perú · 44.38 min activos · 11 rage clicks · 159 dead clicks · 181 errores de consola<br>
+              3. Murguía Consultores · 26.82 min activos · 3 rage clicks · 66 dead clicks · 194 errores de consola<br><br>
+              Lectura: La fricción recurrente debe validarse con replays, logs, tickets e instrumentación antes de asumir causa de diseño.</div>
+              <span class="sdiv"></span>
+              <div class="ss"><span class="sh">⭐ NSM, NEGOCIO Y OKRs</span><br><br>
+              NSM oficial: abr: sin dato → may: sin dato → jun: <span class="sv">17</span><br>
+              ARR asociado: abr: sin dato → may: sin dato → jun: <span class="sg">$212,793.51</span><br><br>
+              Avance general OKRs<br>
+              ██████░░░░ 56,8% completado<br>
+              Pendiente: 43,2%<br><br>
+              OKR con mayor avance<br>
+              Habilitar un nuevo agente para Roleplays en procesos de reclutamiento<br>
+              ████████░░ 80%<br><br>
+              OKR con mayor brecha<br>
+              Sistema de créditos de reclutamiento<br>
+              ░░░░░░░░░░ 0%<br><br>
+              Metas pendientes: 43.2% pendiente<br><br>
+              Lectura: El Q debe mostrar si el avance de producto también ayuda a destrabar negocio. Si el uso crece, pero pricing, créditos o metas no avanzan, existe adopción sin suficiente escalabilidad comercial.</div>
+              <span class="sdiv"></span>
+              <div class="ss"><span class="sh">💬 FEEDBACK, SOPORTE Y TICKETS</span><br><br>
+              Feedback más mencionado: sin registros consolidados<br>
+              Feedback más relevante para producto: sin dato consolidado; revisar fricción, funnel y sesiones destacadas como evidencia principal<br>
+              Tickets técnicos más relacionados: sin dato consolidado<br><br>
+              Cruce con datos del Q<br>
+              PostHog muestra: fricción alta en Detalle, Dashboard y Configuración.<br>
+              Feedback/tickets indican: fuente técnica pendiente por conectar<br>
+              Prioridad sugerida: <span class="so">alta</span><br><br>
+              Lectura: El feedback y los tickets deben ayudar a explicar si las señales del Q responden a problemas técnicos, barreras de experiencia, baja demanda o necesidad de acompañamiento.</div>
+              <span class="sdiv"></span>
+              <div class="ss"><span class="sh">🏢 EMPRESAS CON MAYOR SEÑAL DE RIESGO</span><br><br>
+              🎫 Tickets / soporte: Sin dato consolidado · fuente técnica pendiente por conectar<br><br>
+              📊 Datos de uso / fricción<br>
+              <span class="sr">🔴 Genomma Lab · Error técnico distinto del 404 · 25.9 min activos · 13.66% actividad · 1 rage click · 126 dead clicks · 283 errores de consola</span><br>
+              <span class="sr">🔴 AK Drilling Perú · Ruta o estado inválido · 44.38 min activos · 42.53% actividad · 11 rage clicks · 159 dead clicks · 181 errores de consola</span><br>
+              <span class="so">🟠 Murguía Consultores · Esfuerzo elevado en creación · 26.82 min activos · 26.94% actividad · 3 rage clicks · 66 dead clicks · 194 errores de consola</span><br><br>
+              Lectura: El foco no es listar todas las empresas, sino identificar cuáles requieren revisión prioritaria por acumulación de señales.</div>
+              <span class="sdiv"></span>
+              <div class="ss"><span class="sh">🧠 QUÉ NOS DEJA ESTE Q</span><br><br>
+              <span class="sg">🟢 Uso real</span><br>
+              Vacantes · Candidatos · Serena<br>
+              El producto sí está generando operación en empresas activas.<br><br>
+              <span class="sy">🟡 Activación por crecer</span><br>
+              Empresas activas ≠ empresas activadas<br>
+              El reto es que más empresas creen y publiquen vacantes.<br><br>
+              <span class="so">🟠 Fricción recurrente</span><br>
+              Detalle · Dashboard · Configuración<br>
+              Dead clicks · rage clicks · 404 · rutas inválidas<br><br>
+              <span class="so">🟠 Datos incompletos</span><br>
+              Usuarios sin identidad · empresas mal asociadas<br>
+              Esto limita análisis por empresa, rol y recurrencia.<br><br>
+              <span class="sy">🟡 Negocio por conectar</span><br>
+              Uso del producto + créditos + pricing<br>
+              Falta convertir mejor la adopción en oportunidad comercial.<br><br>
+              Lectura del Q: HIRING en Q2 2026 (corte junio) muestra crecimiento operativo y NSM oficial, pero la activación de vacantes y la rentabilidad acumulada necesitan atención. La alta fricción en pantallas clave y el estancamiento del sistema de créditos son prioritarios para el siguiente Q.</div>
+              <span class="sdiv"></span>
+              <div class="ss"><span class="sh">🚀 OBJETIVOS Y FOCO DEL SIGUIENTE Q</span><br><br>
+              1️⃣ Activar más empresas<br>
+              ██████░░░░ Más empresas creando y publicando vacantes.<br>
+              Indicador: % empresas activas con vacante creada.<br><br>
+              2️⃣ Reducir fricción crítica<br>
+              █████░░░░░ Validar y corregir Detalle, Dashboard y Configuración.<br>
+              Indicador: ↓ dead clicks, rage clicks, 404 y rutas inválidas.<br><br>
+              3️⃣ Mejorar calidad de datos<br>
+              █████░░░░░ Más usuarios y empresas correctamente identificados.<br>
+              Indicador: % de identificación confiable.<br><br>
+              4️⃣ Profundizar Serena<br>
+              ███████░░░ Mantener volumen y mejorar valor percibido.<br>
+              Indicador: empresas con Serena, entrevistas y puntaje promedio.<br><br>
+              5️⃣ Conectar uso con monetización<br>
+              ████░░░░░░ Avanzar créditos y pricing del módulo.<br>
+              Indicador: avance OKR créditos / pricing.<br><br>
+              🎯 Objetivo recomendado del siguiente Q: Aumentar la activación real de HIRING en empresas con producto activo, reduciendo fricción en creación/gestión de vacantes y consolidando el sistema de créditos como habilitador comercial.</div>
+              <span class="sdiv"></span>
+              <div class="ss"><span class="sh">✅ CIERRE</span><br>
+              HIRING cierra el Q con señales de uso real y profundidad operativa.<br><br>
+              El siguiente Q debe enfocarse en crecer de forma más sana: más empresas activadas, mejor entrada al funnel, menos fricción recurrente, mejores datos y mayor conexión entre producto y negocio.<br><br>
+              <span class="sm">Lectura trimestral asistida por Gemini y controlada con métricas determinísticas.</span></div>
+            </div>
+          </div>
+        </div>
+
+      </main>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Popover -->
+  <div class="popover" id="popover">
+    <div class="pop-hd" id="pop-hd"></div>
+    <div class="pop-body" id="pop-body"></div>
+  </div>
+
+  <script>
+    // ── INFO DICTIONARY ──────────────────────────────────────────────────────
+    const INFO = {
+      // SEMANAL
+      '🧭 LECTURA EJECUTIVA': {
+        objetivo: 'Sintetizar el estado del producto en una sola señal de semáforo para tomar decisiones rápidas.',
+        preguntas: ['¿El producto mejoró o empeoró respecto a la semana anterior?', '¿Hay una alerta prioritaria que necesita atención inmediata?', '¿Qué conviene investigar antes del próximo ciclo?'],
+        apunta: 'Equipo de producto y liderazgo que necesita un diagnóstico rápido antes de entrar al detalle.'
+      },
+      '💓 PULSO DE LA SEMANA': {
+        objetivo: 'Monitorear indicadores base de actividad: usuarios, empresas, sesiones y acciones clave.',
+        preguntas: ['¿Crecieron o cayeron usuarios y sesiones?', '¿Los usuarios ejecutan más acciones clave?', '¿Qué porcentaje de sesiones incluye una acción de valor?'],
+        apunta: 'Detectar tendencias en 7 días antes de que se conviertan en patrones difíciles de revertir.'
+      },
+      '🧩 USO DE FUNCIONALIDADES': {
+        objetivo: 'Medir adopción e intensidad de uso por feature para identificar qué crece, qué estanca y qué pierde tracción.',
+        preguntas: ['¿Qué funcionalidades ganaron alcance esta semana?', '¿Dónde cayó la intensidad de uso?', '¿Hay funcionalidades clave con caída sostenida?'],
+        apunta: 'Priorización de esfuerzo de soporte, onboarding o desarrollo según señales reales de uso.'
+      },
+      '🔀 FUNNEL DE CREACIÓN DE VACANTES': {
+        objetivo: 'Identificar en qué paso del funnel se pierde conversión al crear una vacante.',
+        preguntas: ['¿Dónde abandona el usuario el proceso?', '¿Mejoró o empeoró la tasa de completado?', '¿Hay un paso con caída consistente en múltiples semanas?'],
+        apunta: 'Detectar fricción estructural en el flujo más crítico del producto antes de que afecte la activación.'
+      },
+      '🔁 RECURRENCIA Y CONTINUIDAD': {
+        objetivo: 'Medir si los usuarios y empresas que usaron el producto la semana anterior vuelven.',
+        preguntas: ['¿Qué porcentaje de usuarios activos la semana pasada regresó?', '¿La recurrencia sube o baja en el tiempo?', '¿Hay empresas con señal de desenganche?'],
+        apunta: 'Distinguir entre adopción puntual y uso sostenido — base para proyecciones de retención.'
+      },
+      '⚠️ FRICCIÓN POR PANTALLA': {
+        objetivo: 'Mapear las pantallas con más errores, crashes o comportamientos anómalos para priorizar correcciones.',
+        preguntas: ['¿Dónde ocurren más errores 404 o fallos técnicos?', '¿Qué pantallas concentran la mayor fricción?', '¿Hay patrones recurrentes en las mismas rutas?'],
+        apunta: 'Identificar deuda técnica accionable y priorizar el backlog de bugs por impacto real en usuario.'
+      },
+      '🏢 EMPRESAS CON MAYOR SEÑAL DE RIESGO': {
+        objetivo: 'Señalar empresas con comportamientos que anticipan churn o desactivación.',
+        preguntas: ['¿Qué empresas tienen caída sostenida de actividad?', '¿Cuántas sesiones o acciones clave hicieron esta semana?', '¿Coinciden con empresas con tickets abiertos?'],
+        apunta: 'CS y cuenta para priorizar outreach preventivo antes de perder una cuenta activa.'
+      },
+      '🎯 HALLAZGOS Y ACCIONES': {
+        objetivo: 'Convertir los datos de la semana en conclusiones accionables con responsable y plazo.',
+        preguntas: ['¿Cuál es el hallazgo más importante de esta semana?', '¿Qué acción concreta se recomienda?', '¿Quién debería actuar y cuándo?'],
+        apunta: 'Equipo de producto para cierre semanal — conecta análisis con decisión operativa.'
+      },
+      '👀 MONITOREAR LA PRÓXIMA SEMANA': {
+        objetivo: 'Definir qué señales deben seguirse la próxima semana para confirmar o refutar hipótesis actuales.',
+        preguntas: ['¿Qué indicador debe mejorar para considerar la semana exitosa?', '¿Qué alerta debe monitorearse de cerca?', '¿Hay un experimento o cambio en curso cuyo efecto debe medirse?'],
+        apunta: 'Crear continuidad entre radar semanal — no leer métricas aisladas sino en secuencia.'
+      },
+
+      // QUINCENAL
+      '📌 PULSO DEL PERIODO': {
+        objetivo: 'Consolidar los indicadores de actividad de las dos semanas para una visión de periodo.',
+        preguntas: ['¿Cómo evolucionó la actividad respecto al periodo anterior?', '¿El crecimiento es sostenido o puntual?', '¿Qué empresa o grupo de empresas lidera el uso?'],
+        apunta: 'Detectar si las señales semanales son ruido o tendencia real de 15 días.'
+      },
+      '⭐ NSM · REFERENCIA OPERATIVA': {
+        objetivo: 'Medir cuántas empresas cumplen el indicador de valor del producto (North Star Metric).',
+        preguntas: ['¿Cuántas empresas cumplen el NSM este periodo?', '¿La tasa de cumplimiento sube o baja respecto al quincenal anterior?', '¿Hay empresas cerca del umbral que necesitan acompañamiento?'],
+        apunta: 'Conectar el uso del producto con la generación de valor real — la métrica que importa al negocio.'
+      },
+      '⚙️ OPERACIÓN DE HIRING': {
+        objetivo: 'Medir el volumen real de operación: vacantes creadas, candidatos cargados, entrevistas y uso de Serena.',
+        preguntas: ['¿Cuántas vacantes y candidatos generó el producto en el periodo?', '¿Está creciendo la operación o estancándose?', '¿Hay un gap entre empresas activas y empresas operativas?'],
+        apunta: 'Distinguir entre empresas que tienen acceso y las que realmente operan el producto día a día.'
+      },
+      '📈 ADOPCIÓN': {
+        objetivo: 'Ver qué porcentaje de la base habilitada llegó a crear vacantes, cargar candidatos o usar Serena.',
+        preguntas: ['¿Qué % de empresas activas usó cada feature principal?', '¿Hubo mejora en el embudo de activación?', '¿Qué grupo de empresas sigue sin activarse?'],
+        apunta: 'Identificar la brecha entre habilitación y activación real para orientar esfuerzo de CS o producto.'
+      },
+      '🟠 RENTABILIDAD PRELIMINAR': {
+        objetivo: 'Asociar el uso real del producto con el ARR generado y el balance acumulado del periodo.',
+        preguntas: ['¿Cuánto ARR está activo y cuánto corresponde a empresas con uso sostenido?', '¿El balance acumulado mejora o empeora?', '¿Qué empresas de alto ARR tienen bajo uso?'],
+        apunta: 'Conectar experiencia de uso con resultado económico — insumo para decisiones comerciales.'
+      },
+      '💬 SEÑALES DE CLIENTE Y OPERACIÓN': {
+        objetivo: 'Agregar feedback, tickets y señales cualitativas del periodo para complementar el dato cuantitativo.',
+        preguntas: ['¿Qué fricción reportaron clientes esta quincena?', '¿Hay tickets técnicos recurrentes que indiquen un problema de producto?', '¿El feedback cualitativo confirma o contradice los datos?'],
+        apunta: 'CS y producto para alinear percepción de cliente con señal operativa real.'
+      },
+      '🟡 OKRs · AVANCE Y BRECHA': {
+        objetivo: 'Medir el avance quincenal en los OKRs del trimestre e identificar dónde está la mayor brecha.',
+        preguntas: ['¿Cuánto avanzamos en cada OKR desde el último corte?', '¿Dónde está la brecha más grande?', '¿Hay algún OKR sin meta definida que bloquee la medición?'],
+        apunta: 'Cerrar la brecha entre operación y estrategia — sin meta no hay medición de impacto.'
+      },
+
+      // MENSUAL
+      '🧭 ESTADO GENERAL DEL MES': {
+        objetivo: 'Dar una lectura ejecutiva del mes en 30 segundos: nivel de alerta y principales conclusiones.',
+        preguntas: ['¿Cómo cerró el mes en adopción, operación, fricción y negocio?', '¿Cuál es el nivel de alerta general?', '¿Cuál fue el evento más relevante del mes?'],
+        apunta: 'Dirección y stakeholders que necesitan el estado del producto sin entrar al detalle.'
+      },
+      '📊 PULSO VISUAL DEL MES': {
+        objetivo: 'Mostrar la evolución semanal de los indicadores clave dentro del mes en formato visual.',
+        preguntas: ['¿Qué semana fue la más fuerte y cuál la más débil?', '¿Hay tendencia creciente, plana o decreciente en el mes?', '¿Los indicadores clave mejoran o empeoran semana a semana?'],
+        apunta: 'Separar señales puntuales de patrones relevantes — el ruido semanal vs. la tendencia mensual.'
+      },
+      '🏢 ADOPCIÓN Y ALCANCE': {
+        objetivo: 'Consolidar cuántas empresas y usuarios usaron el producto durante el mes.',
+        preguntas: ['¿Cuántas empresas estuvieron activas este mes?', '¿El alcance creció respecto al mes anterior?', '¿Qué tipo de empresa concentra el mayor uso?'],
+        apunta: 'Medir la salud del ecosistema de clientes activos y la trayectoria de crecimiento mensual.'
+      },
+      '⚠️ MAPA DE FRICCIÓN': {
+        objetivo: 'Consolidar todos los puntos de fricción del mes para priorizar el backlog de mejoras.',
+        preguntas: ['¿Qué pantallas o flujos concentran más fricción en el mes?', '¿Los errores son nuevos o recurrentes desde semanas anteriores?', '¿Hay fricción que afecta a empresas de alto valor?'],
+        apunta: 'Product y engineering para priorizar correcciones por impacto real en usuario activo.'
+      },
+      '⭐ NSM, NEGOCIO Y OKRs': {
+        objetivo: 'Cruzar el cumplimiento del NSM con el avance de OKRs y el estado del negocio al cierre del mes.',
+        preguntas: ['¿Cuántas empresas cumplen el NSM este mes?', '¿El ARR activo crece en sintonía con la adopción?', '¿El mes suma o resta en los OKRs del Q?'],
+        apunta: 'Conectar la lectura operativa con los compromisos estratégicos del trimestre.'
+      },
+      '💬 FEEDBACK, SOPORTE Y TICKETS': {
+        objetivo: 'Agregar y clasificar el feedback y los tickets del mes para identificar patrones de fricción percibida.',
+        preguntas: ['¿Cuántos tickets se abrieron y cerraron este mes?', '¿Hay un tipo de problema recurrente?', '¿Qué feedback cualitativo complementa los datos de uso?'],
+        apunta: 'CS, soporte y producto para alinear la agenda de mejoras con la percepción real del cliente.'
+      },
+      '🎯 PRIORIDADES DEL SIGUIENTE CICLO': {
+        objetivo: 'Definir las 3–5 acciones más importantes para el próximo mes a partir del cierre del mes actual.',
+        preguntas: ['¿Qué problema no resuelto debe atacarse primero?', '¿Qué feature o fix tiene mayor impacto potencial?', '¿Qué stakeholder debe involucrarse en el siguiente ciclo?'],
+        apunta: 'Equipo de producto para entrar al nuevo mes con una agenda clara y fundamentada en datos.'
+      },
+
+      // TRIMESTRAL
+      '🧭 ESTADO GENERAL DEL Q': {
+        objetivo: 'Síntesis ejecutiva del trimestre: qué ocurrió, cuál fue el nivel de alerta y cuáles son los aprendizajes clave.',
+        preguntas: ['¿Cómo cerró el Q en adopción, operación, fricción y negocio?', '¿Cumplimos los OKRs del trimestre?', '¿Cuál fue la señal más importante del Q?'],
+        apunta: 'Dirección, producto y negocio para cerrar el trimestre con una lectura compartida.'
+      },
+      '📊 PULSO VISUAL DEL Q': {
+        objetivo: 'Mostrar la evolución mensual de los indicadores clave durante el trimestre en formato visual.',
+        preguntas: ['¿Qué mes fue el más fuerte y cuál el más débil del Q?', '¿Hay tendencia creciente o de deterioro en el trimestre?', '¿Los indicadores mejoran progresivamente o muestran alta variabilidad?'],
+        apunta: 'Contextualizar las lecturas mensuales — lo que parecía ruido en una semana, ¿fue tendencia real del Q?'
+      },
+      '🧠 QUÉ NOS DEJA ESTE Q': {
+        objetivo: 'Documentar los aprendizajes estratégicos del trimestre: qué funcionó, qué no y qué debe cambiarse.',
+        preguntas: ['¿Qué hipótesis se confirmaron y cuáles se refutaron?', '¿Qué decisiones de producto resultaron acertadas?', '¿Dónde sobreestimamos o subestimamos el impacto?'],
+        apunta: 'Cierre de Q para el equipo de producto — insumo directo para el planning del siguiente trimestre.'
+      },
+      '🚀 OBJETIVOS Y FOCO DEL SIGUIENTE Q': {
+        objetivo: 'Definir el foco estratégico del siguiente trimestre basado en los aprendizajes del Q que cierra.',
+        preguntas: ['¿Cuál es el objetivo principal del siguiente Q?', '¿Qué debe priorizarse para crecer de forma más sana?', '¿Qué metas deben estar definidas antes de iniciar el Q?'],
+        apunta: 'Planning trimestral — conectar lo aprendido con los compromisos del siguiente ciclo.'
+      },
+
+      // SHARED (same key across multiple boletines)
+    };
+
+    // Shared sections that appear in multiple boletines
+    const SHARED = {
+      '🏢 ADOPCIÓN Y ALCANCE': {
+        objetivo: 'Consolidar la base activa del periodo: empresas y usuarios que realmente usaron el producto.',
+        preguntas: ['¿Cuántas empresas usaron el producto en el periodo?', '¿Creció o cayó la base activa respecto al periodo anterior?', '¿Qué segmento de empresa concentra el mayor uso?'],
+        apunta: 'Medir la amplitud real del producto más allá del número de contratos habilitados.'
+      },
+      '🧩 USO DE FUNCIONALIDADES': {
+        objetivo: 'Medir adopción e intensidad de cada feature para identificar qué crece, qué estanca y qué pierde tracción.',
+        preguntas: ['¿Qué funcionalidades tienen mayor alcance?', '¿Cuáles perdieron intensidad de uso?', '¿Hay features con adopción consistentemente baja?'],
+        apunta: 'Priorizar desarrollo, soporte y onboarding según señales reales de uso del periodo.'
+      },
+      '🔀 FUNNEL DE CREACIÓN DE VACANTES': {
+        objetivo: 'Medir la conversión del flujo de creación de vacantes e identificar dónde se pierde el usuario.',
+        preguntas: ['¿En qué paso abandona más el usuario?', '¿La conversión mejoró respecto al periodo anterior?', '¿Hay un paso con caída persistente en múltiples periodos?'],
+        apunta: 'Detectar fricción estructural en el flujo más crítico antes de que afecte la activación.'
+      },
+      '⚙️ OPERACIÓN DEL PRODUCTO': {
+        objetivo: 'Medir el volumen operativo del periodo: vacantes, candidatos, entrevistas y uso de Serena.',
+        preguntas: ['¿Cuántas vacantes y candidatos procesó el producto?', '¿Creció la operación respecto al periodo anterior?', '¿Qué empresas concentran el mayor volumen operativo?'],
+        apunta: 'Distinguir entre empresas que acceden al producto y las que lo operan activamente.'
+      },
+      '⭐ NSM, NEGOCIO Y OKRs': {
+        objetivo: 'Cruzar NSM, ARR y OKRs para conectar el uso real con el resultado de negocio.',
+        preguntas: ['¿Cuántas empresas cumplen el NSM?', '¿El ARR activo crece con la adopción?', '¿El periodo suma o resta en los OKRs del Q?'],
+        apunta: 'Conectar la lectura operativa con los compromisos estratégicos del trimestre.'
+      },
+      '💬 FEEDBACK, SOPORTE Y TICKETS': {
+        objetivo: 'Agregar y clasificar el feedback y tickets del periodo para identificar patrones de fricción percibida.',
+        preguntas: ['¿Qué tipo de problema reportan más los clientes?', '¿Hay tickets recurrentes que indiquen un problema de producto?', '¿El feedback cualitativo confirma los datos cuantitativos?'],
+        apunta: 'CS, soporte y producto para alinear la agenda de mejoras con la percepción real del cliente.'
+      },
+      '🏢 EMPRESAS CON MAYOR SEÑAL DE RIESGO': {
+        objetivo: 'Identificar empresas con comportamientos que anticipan churn o desactivación.',
+        preguntas: ['¿Qué empresas tienen caída sostenida de actividad?', '¿Coinciden con empresas que tienen tickets abiertos?', '¿Cuánto tiempo llevan sin actividad significativa?'],
+        apunta: 'CS y cuenta para priorizar outreach preventivo antes de perder una cuenta activa.'
+      },
+      '✅ CIERRE': {
+        objetivo: 'Síntesis final del periodo con el estado del producto y las prioridades del siguiente ciclo.',
+        preguntas: ['¿Cuál es el resumen en una línea del periodo?', '¿Qué acción es la más urgente?', '¿Qué debe monitorearse en el siguiente periodo?'],
+        apunta: 'Equipo de producto para cerrar el ciclo con claridad y entrar al siguiente con foco.'
+      },
+      '🎯 HALLAZGOS Y ACCIONES': {
+        objetivo: 'Convertir los datos del periodo en conclusiones accionables con responsable claro.',
+        preguntas: ['¿Cuál es el hallazgo más importante del periodo?', '¿Qué acción concreta se recomienda?', '¿Quién debería actuar y cuándo?'],
+        apunta: 'Equipo de producto para traducir análisis en decisión operativa.'
+      },
+      '⚠️ MAPA DE FRICCIÓN DEL Q': {
+        objetivo: 'Consolidar todos los puntos de fricción del trimestre para priorizar el siguiente ciclo de mejoras.',
+        preguntas: ['¿Qué pantallas o flujos concentran más fricción en el Q?', '¿Hay fricción recurrente que no se ha resuelto?', '¿Qué fricción afecta a empresas de alto valor?'],
+        apunta: 'Product y engineering para entrar al siguiente Q con un backlog de mejoras fundamentado.'
+      },
+      '🎯 PRIORIDADES · Ampliar activación': {
+        objetivo: 'Definir el foco estratégico del siguiente ciclo basado en el cierre del periodo actual.',
+        preguntas: ['¿Qué problema debe atacarse primero?', '¿Qué palanca tiene mayor impacto potencial?', '¿Qué stakeholder debe involucrarse en el siguiente ciclo?'],
+        apunta: 'Equipo de producto para entrar al próximo ciclo con una agenda clara y fundamentada.'
+      }
+    };
+
+    function getInfo(heading) {
+      const key = heading.trim();
+      return INFO[key] || SHARED[key] || null;
+    }
+
+    // ── SIDEBAR NAV ──────────────────────────────────────────────────────────
+    const navItems = document.querySelectorAll('.nav-item');
+    const boletines = document.querySelectorAll('.boletin');
+
+    navItems.forEach(item => {
+      item.addEventListener('click', () => {
+        const id = item.dataset.b;
+        navItems.forEach(n => n.classList.remove('on'));
+        item.classList.add('on');
+        boletines.forEach(b => {
+          b.classList.toggle('on', b.dataset.b === id);
+        });
+        document.getElementById('content').scrollTop = 0;
+      });
+    });
+
+    // ── HOVER POPOVER ────────────────────────────────────────────────────────
+    const popover = document.getElementById('popover');
+    const popHd = document.getElementById('pop-hd');
+    const popBody = document.getElementById('pop-body');
+    let hideTimer = null;
+
+    function showPopover(el, heading) {
+      const data = getInfo(heading);
+      if (!data) return;
+
+      clearTimeout(hideTimer);
+
+      popHd.innerHTML = heading;
+      popBody.innerHTML = `
+        <div class="pop-section">
+          <div class="pop-label">
+            <span class="pop-label-icon obj"><i class="ti ti-target"></i></span>
+            Objetivo
+          </div>
+          <div class="pop-val">${data.objetivo}</div>
+        </div>
+        <div class="pop-section">
+          <div class="pop-label">
+            <span class="pop-label-icon qs"><i class="ti ti-message-question"></i></span>
+            Preguntas que responde
+          </div>
+          <ul class="pop-qs">${data.preguntas.map(q => `<li>${q}</li>`).join('')}</ul>
+        </div>
+        <div class="pop-section">
+          <div class="pop-label">
+            <span class="pop-label-icon aim"><i class="ti ti-users"></i></span>
+            A quién apunta
+          </div>
+          <div class="pop-val">${data.apunta}</div>
+        </div>`;
+
+      const rect = el.getBoundingClientRect();
+      const vh = window.innerHeight;
+
+      // Always pin to right edge of viewport
+      popover.style.right = '16px';
+      popover.style.left = 'auto';
+
+      // Align vertically with hovered element, clamped to viewport
+      let top = rect.top;
+      const ph = popover.offsetHeight || 260;
+      if (top + ph > vh - 16) top = vh - ph - 16;
+      if (top < 16) top = 16;
+
+      popover.style.top = top + 'px';
+      popover.classList.add('vis');
+    }
+
+    function hidePopover() {
+      hideTimer = setTimeout(() => popover.classList.remove('vis'), 120);
+    }
+
+    // Attach hover to all .ss sections
+    function attachHovers() {
+      document.querySelectorAll('.ss').forEach(el => {
+        // Add hint icon
+        if (!el.querySelector('.ss-hint')) {
+          el.insertAdjacentHTML('beforeend', '<i class="ss-hint ti ti-info-circle"></i>');
+        }
+        el.addEventListener('mouseenter', () => {
+          const sh = el.querySelector('.sh');
+          if (sh) showPopover(el, sh.textContent.trim());
+        });
+        el.addEventListener('mouseleave', hidePopover);
+      });
+    }
+
+    popover.addEventListener('mouseenter', () => clearTimeout(hideTimer));
+    popover.addEventListener('mouseleave', hidePopover);
+
+    attachHovers();
+
+    // ── SIDEBAR COLLAPSE ─────────────────────────────────────────────────────
+    const sidebarToggle = document.getElementById('sidebarToggle');
+    const sidebar = document.getElementById('sidebar');
+    const toggleIcon = document.getElementById('toggleIcon');
+
+    sidebarToggle.addEventListener('click', () => {
+      const collapsed = sidebar.classList.toggle('collapsed');
+      toggleIcon.className = collapsed
+        ? 'ti ti-layout-sidebar-left-expand'
+        : 'ti ti-layout-sidebar-left-collapse';
+      sidebarToggle.title = collapsed ? 'Expandir menú' : 'Contraer menú';
+    });
+
+    // ── THEME TOGGLE ─────────────────────────────────────────────────────────
+    const themeBtn = document.getElementById('themeBtn');
+    const themeIcon = document.getElementById('themeIcon');
+    const root = document.documentElement;
+
+    // Detect system preference as starting point
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    let currentTheme = prefersDark ? 'dark' : 'light';
+    root.setAttribute('data-theme', currentTheme);
+    themeIcon.className = currentTheme === 'dark' ? 'ti ti-sun' : 'ti ti-moon';
+
+    themeBtn.addEventListener('click', () => {
+      currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', currentTheme);
+      themeIcon.className = currentTheme === 'dark' ? 'ti ti-sun' : 'ti ti-moon';
+    });
+  </script>
+</body>
+</html>
