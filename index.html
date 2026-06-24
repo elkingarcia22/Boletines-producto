@@ -704,6 +704,14 @@
       .sm { color: #7a7e89 !important; }
     }
 
+    [data-theme="light"] .content { background: #f1f2f4; }
+    [data-theme="light"] .slk-top { background: #e8e9ec !important; border-bottom-color: rgba(0,0,0,0.12) !important; }
+    [data-theme="light"] .slk-b { color: #3d3f49 !important; }
+    [data-theme="light"] .sh { color: #111 !important; }
+    [data-theme="light"] .sv { color: #111 !important; }
+    [data-theme="light"] .sdiv { border-top-color: rgba(0,0,0,0.1) !important; }
+    [data-theme="light"] .sm { color: #7a7e89 !important; }
+
     /* ── Hoverable sections ───────────────────────── */
     .ss {
       margin-top: 4px;
@@ -721,6 +729,7 @@
     @media (prefers-color-scheme: light) {
       .ss:hover { background: rgba(0,0,0,0.04); }
     }
+    [data-theme="light"] .ss:hover { background: rgba(0,0,0,0.04); }
 
     .ss-hint {
       position: absolute;
@@ -745,6 +754,7 @@
     @media (prefers-color-scheme: light) {
       .ss-hint { background: rgba(0,0,0,0.08); color: rgba(0,0,0,0.4); }
     }
+    [data-theme="light"] .ss-hint { background: rgba(0,0,0,0.08); color: rgba(0,0,0,0.4); }
 
     /* ── Popover ──────────────────────────────────── */
     .popover {
