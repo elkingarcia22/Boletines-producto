@@ -694,17 +694,19 @@
     .boletin.on { display: block; }
     .content:has([data-b="inicio"].on) { background: var(--bg2); }
 
-    /* Fuerza variables oscuras para las secciones de boletines incluso en modo claro */
-    .boletin:not([data-b="inicio"]) {
-      --bg: #1c1e22;
-      --bg2: #252830;
-      --bg3: #1c1e22;
-      --txt: #e8e8ec;
-      --txt2: #a0a2b0;
-      --txt3: #606272;
-      --bdr: rgba(255,255,255,0.1);
-      --bdr2: rgba(255,255,255,0.22);
+    @media (prefers-color-scheme: light) {
+      .content { background: #f1f2f4; }
+      .slk-top { background: #e8e9ec !important; border-bottom-color: rgba(0,0,0,0.12) !important; }
+      .slk-ch { color: #1d1c1d !important; }
+      .slk-desc { color: #616061 !important; }
     }
+
+    [data-theme="light"] .content { background: #f1f2f4; }
+    [data-theme="light"] .slk-top { background: #e8e9ec !important; border-bottom-color: rgba(0,0,0,0.12) !important; }
+    [data-theme="light"] .slk-ch { color: #1d1c1d !important; }
+    [data-theme="light"] .slk-desc { color: #616061 !important; }
+
+
 
     /* ── Hoverable sections ───────────────────────── */
     .ss {
@@ -862,7 +864,12 @@
     .slk-ch { color: var(--slk-hd); font-size: 13px; font-weight: 600; }
     .slk-desc { color: var(--slk-muted); font-size: 11px; line-height: 1.45; }
 
-    .slk-msg { padding: 16px 18px 24px; }
+    .slk-msg { 
+      padding: 16px 18px 24px; 
+      background: var(--slk-bg);
+      border-bottom-left-radius: 8px;
+      border-bottom-right-radius: 8px;
+    }
 
     .slk-who {
       display: flex;
