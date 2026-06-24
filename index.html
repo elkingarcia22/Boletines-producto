@@ -205,12 +205,12 @@
 
     .sidebar.collapsed { width: 56px; }
 
-    .sidebar-header {
+    .sidebar-footer {
       padding: 12px 12px 10px;
-      border-bottom: 1px solid var(--bdr);
+      border-top: 1px solid var(--bdr);
     }
 
-    .sidebar-header-inner {
+    .sidebar-footer-inner {
       display: flex;
       align-items: center;
       gap: 8px;
@@ -256,7 +256,7 @@
 
     .sidebar-toggle:hover { background: var(--bg2); color: var(--txt); }
 
-    .sidebar.collapsed .sidebar-header { padding: 12px 8px 10px; }
+    .sidebar.collapsed .sidebar-footer { padding: 12px 8px 10px; }
     .sidebar.collapsed .sidebar-header-text { display: none; }
     .sidebar.collapsed .sidebar-toggle { margin: 0 auto; }
     .sidebar.collapsed .sidebar-tip { display: none; }
@@ -968,14 +968,6 @@
     <div class="main">
 
       <aside class="sidebar" id="sidebar">
-        <div class="sidebar-header">
-          <div class="sidebar-header-inner" style="justify-content:flex-end">
-            <button class="sidebar-toggle" id="sidebarToggle" title="Contraer menú">
-              <i class="ti ti-layout-sidebar-left-collapse" id="toggleIcon"></i>
-            </button>
-          </div>
-        </div>
-
         <div class="sidebar-nav">
           <button class="nav-item on" data-b="inicio" title="Inicio">
             <div class="nav-stripe"></div>
@@ -1027,9 +1019,12 @@
           </button>
         </div>
 
-        <div class="sidebar-tip">
-          <i class="ti ti-cursor-text"></i>
-          <span>Hover sobre cada sección del boletín para ver objetivo y preguntas.</span>
+        <div class="sidebar-footer">
+          <div class="sidebar-footer-inner" style="justify-content:flex-end">
+            <button class="sidebar-toggle" id="sidebarToggle" title="Contraer menú">
+              <i class="ti ti-layout-sidebar-left-collapse" id="toggleIcon"></i>
+            </button>
+          </div>
         </div>
       </aside>
 
@@ -1235,6 +1230,9 @@
         </div>
 
         <div class="boletin" data-b="semanal">
+          <div style="background:var(--bg3); color:var(--txt2); font-size:11px; padding:8px 16px; display:flex; align-items:center; gap:6px; border-bottom:1px solid var(--bdr);">
+            <i class="ti ti-info-circle" style="font-size:14px; color:var(--txt3);"></i> Hover sobre cada sección del boletín para ver objetivo y preguntas.
+          </div>
           <div class="slk-top">
             <div class="slk-top-row"><span style="color:#7a7e89;font-size:13px">#</span><span class="slk-ch">hiring-producto</span></div>
             <div class="slk-desc">Radar semanal de operación — detecta cambios tempranos en uso, fricción y rendimiento antes de que escalen.
@@ -1365,6 +1363,9 @@
         </div>
 
         <div class="boletin" data-b="quincenal">
+          <div style="background:var(--bg3); color:var(--txt2); font-size:11px; padding:8px 16px; display:flex; align-items:center; gap:6px; border-bottom:1px solid var(--bdr);">
+            <i class="ti ti-info-circle" style="font-size:14px; color:var(--txt3);"></i> Hover sobre cada sección del boletín para ver objetivo y preguntas.
+          </div>
           <div class="slk-top">
             <div class="slk-top-row"><span style="color:#7a7e89;font-size:13px">#</span><span class="slk-ch">hiring-producto</span></div>
             <div class="slk-desc">Pulso quincenal de producto — conecta uso real con avance de OKRs e informa decisiones de roadmap.
@@ -1503,6 +1504,9 @@
         </div>
 
         <div class="boletin" data-b="mensual">
+          <div style="background:var(--bg3); color:var(--txt2); font-size:11px; padding:8px 16px; display:flex; align-items:center; gap:6px; border-bottom:1px solid var(--bdr);">
+            <i class="ti ti-info-circle" style="font-size:14px; color:var(--txt3);"></i> Hover sobre cada sección del boletín para ver objetivo y preguntas.
+          </div>
           <div class="slk-top">
             <div class="slk-top-row"><span style="color:#7a7e89;font-size:13px">#</span><span class="slk-ch">hiring-producto</span></div>
             <div class="slk-desc">Estatus ejecutivo mensual — consolida las señales del mes y separa lo puntual de lo estructural.
@@ -1697,6 +1701,9 @@
         </div>
 
         <div class="boletin" data-b="trimestral">
+          <div style="background:var(--bg3); color:var(--txt2); font-size:11px; padding:8px 16px; display:flex; align-items:center; gap:6px; border-bottom:1px solid var(--bdr);">
+            <i class="ti ti-info-circle" style="font-size:14px; color:var(--txt3);"></i> Hover sobre cada sección del boletín para ver objetivo y preguntas.
+          </div>
           <div class="slk-top">
             <div class="slk-top-row"><span style="color:#7a7e89;font-size:13px">#</span><span class="slk-ch">hiring-producto</span></div>
             <div class="slk-desc">Cierre de Q — mirada estratégica del trimestre, aprendizajes clave y foco para el siguiente período.
@@ -2248,6 +2255,13 @@
         : 'ti ti-layout-sidebar-left-collapse';
       sidebarToggle.title = collapsed ? 'Expandir menú' : 'Contraer menú';
     });
+
+    // Auto-collapse after 5 segundos
+    setTimeout(() => {
+      if (!sidebar.classList.contains('collapsed')) {
+        sidebarToggle.click();
+      }
+    }, 5000);
 
     // ── THEME TOGGLE ─────────────────────────────────────────────────────────
     const themeBtn = document.getElementById('themeBtn');
