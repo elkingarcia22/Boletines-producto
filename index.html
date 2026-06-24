@@ -694,27 +694,17 @@
     .boletin.on { display: block; }
     .content:has([data-b="inicio"].on) { background: var(--bg2); }
 
-    @media (prefers-color-scheme: light) {
-      .content { background: #f1f2f4; }
-      .slk-top { background: #e8e9ec !important; border-bottom-color: rgba(0,0,0,0.12) !important; }
-      .slk-b { color: #3d3f49 !important; }
-      .slk-ch { color: #1d1c1d !important; }
-      .slk-desc { color: #616061 !important; }
-      .sh { color: #111 !important; }
-      .sv { color: #111 !important; }
-      .sdiv { border-top-color: rgba(0,0,0,0.1) !important; }
-      .sm { color: #7a7e89 !important; }
+    /* Fuerza variables oscuras para las secciones de boletines incluso en modo claro */
+    .boletin:not([data-b="inicio"]) {
+      --bg: #1c1e22;
+      --bg2: #252830;
+      --bg3: #1c1e22;
+      --txt: #e8e8ec;
+      --txt2: #a0a2b0;
+      --txt3: #606272;
+      --bdr: rgba(255,255,255,0.1);
+      --bdr2: rgba(255,255,255,0.22);
     }
-
-    [data-theme="light"] .content { background: #f1f2f4; }
-    [data-theme="light"] .slk-top { background: #e8e9ec !important; border-bottom-color: rgba(0,0,0,0.12) !important; }
-    [data-theme="light"] .slk-b { color: #3d3f49 !important; }
-    [data-theme="light"] .slk-ch { color: #1d1c1d !important; }
-    [data-theme="light"] .slk-desc { color: #616061 !important; }
-    [data-theme="light"] .sh { color: #111 !important; }
-    [data-theme="light"] .sv { color: #111 !important; }
-    [data-theme="light"] .sdiv { border-top-color: rgba(0,0,0,0.1) !important; }
-    [data-theme="light"] .sm { color: #7a7e89 !important; }
 
     /* ── Hoverable sections ───────────────────────── */
     .ss {
@@ -729,11 +719,6 @@
     }
 
     .ss:hover { background: rgba(255,255,255,0.05); }
-
-    @media (prefers-color-scheme: light) {
-      .ss:hover { background: rgba(0,0,0,0.04); }
-    }
-    [data-theme="light"] .ss:hover { background: rgba(0,0,0,0.04); }
 
     .ss-hint {
       position: absolute;
@@ -754,11 +739,6 @@
     }
 
     .ss:hover .ss-hint { display: flex; }
-
-    @media (prefers-color-scheme: light) {
-      .ss-hint { background: rgba(0,0,0,0.08); color: rgba(0,0,0,0.4); }
-    }
-    [data-theme="light"] .ss-hint { background: rgba(0,0,0,0.08); color: rgba(0,0,0,0.4); }
 
     /* ── Popover ──────────────────────────────────── */
     .popover {
